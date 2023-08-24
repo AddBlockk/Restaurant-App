@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import CountDown from "./CountDown";
 
-export const Offer = () => {
+const Offer = () => {
   return (
     <div className="bg-black h-screen flex flex-col md:flex-row md:justify-between md:bg-[url('/offerBg.png')] md:h-[70vh]">
       {/* TEXT CONTAINER */}
@@ -26,3 +26,5 @@ export const Offer = () => {
     </div>
   );
 };
+
+export default Offer;

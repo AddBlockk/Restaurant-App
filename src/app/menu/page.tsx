@@ -1,26 +1,29 @@
-import { menu } from "@/data";
+import { pizzas } from "@/data";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const MenuPage = () => {
+const CategoryPage = () => {
   return (
-    <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col md:flex-row items-center">
-      {menu.map((category) => (
+    <div className="flex flex-wrap text-red-500">
+      {pizzas.map((item) => (
         <Link
-          href={`/menu/${category.slug}`}
-          key={category.id}
-          className="w-full h-1/3 bg-cover p-8 md:h-1/2"
-          style={{ backgroundImage: `url(${category.img})` }}
+          className="w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group odd:bg-fuchsia-50"
+          href={`/product/${item.id}`}
+          key={item.id}
         >
-          <div className={`text-${category.color} w-1/2`}>
-            <h1 className="uppercase font-bold text-3xl">{category.title}</h1>
-            <p className="text-sm my-8">{category.desc}</p>
-            <button
-              className={`hidden 2xl:block bg-${category.color} text-${
-                category.color === "black" ? "white" : "red-500"
-              } py-2 px-4 rounded-md`}
-            >
-              Explore
+          {/* IMAGE CONTAINER */}
+          {item.img && (
+            <div className="relative h-[80%]">
+              <Image src={item.img} alt="" fill className="object-contain" />
+            </div>
+          )}
+          {/* TEXT CONTAINER */}
+          <div className="flex items-center justify-between font-bold">
+            <h1 className="text-2xl uppercase p-2">{item.title}</h1>
+            <h2 className="group-hover:hidden text-xl">${item.price}</h2>
+            <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">
+              Add to Cart
             </button>
           </div>
         </Link>
@@ -28,4 +31,5 @@ const MenuPage = () => {
     </div>
   );
 };
-export default MenuPage;
+
+export default CategoryPage;

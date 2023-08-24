@@ -2,7 +2,7 @@ import { featuredProducts } from "@/data";
 import Image from "next/image";
 import React from "react";
 
-export const Featured = () => {
+const Featured = () => {
   return (
     <div className="overflow-x-scroll text-red-500">
       {/* WRAPPER */}
@@ -36,3 +36,5 @@ export const Featured = () => {
     </div>
   );
 };
+
+export default Featured;
