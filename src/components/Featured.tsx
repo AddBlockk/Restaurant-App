@@ -11,8 +11,7 @@ const Featured = () => {
         {featuredProducts.map((item) => (
           <div
             key={item.id}
-            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]"
-          >
+            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]">
             {/* IMAGE CONTAINER */}
             {item.img && (
               <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
@@ -25,9 +24,9 @@ const Featured = () => {
                 {item.title}
               </h1>
               <p className="p-4 2xl:p-8">{item.desc}</p>
-              <span className="text-xl font-bold">${item.price}</span>
+              <span className="text-xl font-bold">₽{item.price}</span>
               <button className="bg-red-500 text-white p-2 rounded-md">
-                Add to Cart
+                Добавить в корзину
               </button>
             </div>
           </div>

@@ -5,17 +5,17 @@ import React, { useEffect, useState } from "react";
 const data = [
   {
     id: 1,
-    title: "always fresh & always crispy & always hot",
+    title: "всегда свежий, всегда хрустящий и всегда горячий",
     image: "/slide1.png",
   },
   {
     id: 2,
-    title: "we deliver your order wherever you are in NY",
+    title: "мы доставим ваш заказ, где бы вы ни находились в Астрахани",
     image: "/slide2.png",
   },
   {
     id: 3,
-    title: "the best pizza to share with your family",
+    title: "лучшая пицца, которой можно поделиться со своей семьей",
     image: "/slide3.jpg",
   },
 ];
@@ -40,7 +40,7 @@ const Slider = () => {
           {data[currentSlide].title}
         </h1>
         <button className="bg-red-500 text-white py-4 px-8 hover:bg-red-900 hover:ease-in duration-100">
-          Order Now
+          Закажи сейчас
         </button>
       </div>
       {/* IMAGE CONTAINER */}

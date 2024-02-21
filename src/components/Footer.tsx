@@ -7,7 +7,7 @@ const Footer = () => {
       <Link href="/" className="font-bold text-xl uppercase">
         Boltach
       </Link>
-      <p>© ALL RIGHTS RESERVED.</p>
+      <p>© ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
     </div>
   );
 };
