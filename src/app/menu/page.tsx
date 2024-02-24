@@ -1,39 +1,38 @@
-import { pizzas } from "@/data";
-import Image from "next/image";
+import { burgers, menu, pizzas } from "@/data";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense, useState } from "react";
+import Loading from "./loading";
 
-const CategoryPage = () => {
+const MenuPage = () => {
   return (
-    <div className="flex flex-wrap text-red-500">
-      {pizzas.map((item) => (
-        <Link
-          className="w-[100%] h-[60vh] border-r-2 border-b-2 opacity-80 hover:opacity-100 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group odd:bg-fuchsia-50"
-          href={`/product/${item.id}`}
-          key={item.id}>
-          {/* IMAGE CONTAINER */}
-          {item.img && (
-            <div className="relative h-[80%] overflow-hidden">
-              <Image
-                src={item.img}
-                alt=""
-                fill
-                className="object-contain transition-all duration-500 hover:rotate-[60deg]"
-              />
+    <Suspense fallback={<Loading />}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] items-center">
+        {menu.map((category) => (
+          <Link
+            href={`/menu/${category.slug}`}
+            key={category.id}
+            className="relative bg-cover p-8 md:h-1/2"
+            style={{ backgroundImage: `url(${category.img})` }}>
+            <div
+              className={`text-${category.color} flex flex-col justify-between h-full w-[50%]`}>
+              <div>
+                <h1 className="uppercase font-bold text-3xl">
+                  {category.title}
+                </h1>
+                <p className="text-sm my-8">{category.desc}</p>
+              </div>
+              <button
+                className={`text-${
+                  category.color === "white" ? "black" : "black"
+                } py-2 px-4 rounded-md absolute bottom-4`}>
+                Подробнее
+              </button>
             </div>
-          )}
-          {/* TEXT CONTAINER */}
-          <div className="flex items-end justify-between font-bold">
-            <h1 className="text-2xl uppercase p-2 w-[80%]">{item.title}</h1>
-            <h2 className="group-hover:hidden text-xl">₽{item.price}</h2>
-            <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md hover:bg-red-900 hover:ease-in duration-100">
-              Добавить в корзину
-            </button>
-          </div>
-        </Link>
-      ))}
-    </div>
+          </Link>
+        ))}
+      </div>
+    </Suspense>
   );
 };
 
-export default CategoryPage;
+export default MenuPage;

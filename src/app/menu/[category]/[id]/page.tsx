@@ -2,13 +2,15 @@
 
 import { useParams } from "next/navigation";
 import Price from "@/components/Price";
-import { pizzas } from "@/data";
+import { featuredProducts } from "@/data";
 import Image from "next/image";
 import React from "react";
 
 const ProductPage = () => {
   const { id } = useParams();
-  const product = pizzas.find((item) => item.id === Number(id)) || pizzas[0];
+  const product =
+    featuredProducts.find((item) => item.id === Number(id)) ||
+    featuredProducts[0];
 
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-red-500 md:flex-row md:gap-8 md:items-center">
