@@ -6,9 +6,7 @@ import React from "react";
 const Featured = () => {
   return (
     <div className="overflow-x-scroll text-red-500">
-      {/* WRAPPER */}
       <div className="w-max flex">
-        {/* SINGLE ITEM */}
         {featuredProducts.map((item) => (
           <div
             key={item.id}

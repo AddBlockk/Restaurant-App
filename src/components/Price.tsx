@@ -1,6 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import type { RootState } from "@/app/redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  decrement,
+  increment,
+} from "@/app/redux/features/counter/counterSlice";
 
 type Props = {
   price: number;
@@ -10,20 +16,20 @@ type Props = {
 
 const Price = ({ price, id, options }: Props) => {
   const [total, setTotal] = useState(price);
-  const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTotal(
-      quantity *
+      count *
         (options ? price + (options[selected]?.additionalPrice || 0) : price)
     );
-  }, [quantity, selected, options, price]);
+  }, [count, selected, options, price]);
 
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold">₽{total}</h2>
-      {/* OPTIONS CONTAINER */}
       <div className="flex gap-4 ">
         {options?.map((option, index) => (
           <button
@@ -38,24 +44,15 @@ const Price = ({ price, id, options }: Props) => {
           </button>
         ))}
       </div>
-      {/* QUANTITY AND ADD BUTTON CONTAINER */}
       <div className="flex justify-between items-center">
-        {/* QUANTITY */}
         <div className="flex justify-between w-full p-3 ring-1 ring-red-500">
           <span>Количество</span>
           <div className="flex gap-4 items-center">
-            <button
-              onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}>
-              {"<"}
-            </button>
-            <span>{quantity}</span>
-            <button
-              onClick={() => setQuantity((prev) => (prev < 9 ? prev + 1 : 9))}>
-              {">"}
-            </button>
+            <button onClick={() => dispatch(decrement())}>{"<"}</button>
+            <span>{count}</span>
+            <button onClick={() => dispatch(increment())}>{">"}</button>
           </div>
         </div>
-        {/* CART BUTTON */}
         <button className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500">
           В корзину
         </button>

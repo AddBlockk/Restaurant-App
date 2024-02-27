@@ -20,7 +20,7 @@ const Menu = () => {
   return (
     <div>
       {/* LONG WAY */}
-      {/* {!open ? (
+      {!open ? (
         <Image
           src="/open.png"
           alt=""
@@ -36,7 +36,7 @@ const Menu = () => {
           height={20}
           onClick={() => setOpen(false)}
         />
-      )} */}
+      )}
 
       {/* SHORTCUT */}
       <Image
@@ -69,8 +69,7 @@ const Menu = () => {
           {/* SHORTCUT */}
           <Link
             href={user ? "/orders" : "login"}
-            onClick={() => setOpen(false)}
-          >
+            onClick={() => setOpen(false)}>
             {user ? "Orders" : "Login"}
           </Link>
           <Link href="/cart" onClick={() => setOpen(false)}>

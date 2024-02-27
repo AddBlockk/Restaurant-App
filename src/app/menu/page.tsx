@@ -2,6 +2,7 @@ import { burgers, menu, pizzas } from "@/data";
 import Link from "next/link";
 import React, { Suspense, useState } from "react";
 import Loading from "./loading";
+import Skeleton from "react-loading-skeleton";
 
 const MenuPage = () => {
   return (
@@ -30,6 +31,7 @@ const MenuPage = () => {
             </div>
           </Link>
         ))}
+        <Skeleton />
       </div>
     </Suspense>
   );
