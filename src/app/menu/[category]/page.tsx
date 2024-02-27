@@ -14,7 +14,7 @@ function Categories() {
     }, 2000);
   }, []);
 
-  return <div>{loading ? <Loading /> : <CategoryPage />}</div>;
+  return <>{<CategoryPage />}</>;
 }
 
 export default Categories;
