@@ -4,14 +4,17 @@ import React, { useEffect, useState } from "react";
 import type { RootState } from "@/app/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "@/app/lib/features/counter/counterSlice";
+import { addItem } from "@/app/lib/features/cart/cartSlice";
 
 type Props = {
   price: number;
   id: number;
+  title: string;
+  img: string;
   options?: { title: string; additionalPrice: number }[];
 };
 
-const Price = ({ price, id, options }: Props) => {
+const Price = ({ price, id, options, img, title }: Props) => {
   const [total, setTotal] = useState(price);
   const [selected, setSelected] = useState(0);
   const count = useSelector((state: RootState) => state.counter.value);
@@ -23,6 +26,26 @@ const Price = ({ price, id, options }: Props) => {
         (options ? price + (options[selected]?.additionalPrice || 0) : price)
     );
   }, [count, selected, options, price]);
+
+  const addToCart = () => {
+    dispatch(
+      addItem({
+        id,
+        quantity: count,
+        price: total / count,
+        title,
+        img,
+        options: options
+          ? [
+              {
+                title: options[selected].title,
+                additionalPrice: options[selected].additionalPrice,
+              },
+            ]
+          : undefined,
+      })
+    );
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -50,7 +73,9 @@ const Price = ({ price, id, options }: Props) => {
             <button onClick={() => dispatch(increment())}>{">"}</button>
           </div>
         </div>
-        <button className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500">
+        <button
+          onClick={addToCart}
+          className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500">
           В корзину
         </button>
       </div>

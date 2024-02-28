@@ -2,21 +2,37 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import Price from "./Price";
 import type { RootState } from "@/app/lib/store";
-import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "@/app/lib/features/counter/counterSlice";
+import { useSelector } from "react-redux";
+
+export interface CartItem {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  price: number;
+  options?: { title: string; additionalPrice: number }[];
+  quantity: number;
+}
 
 export function CartIcon() {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <Link href="/cart" className="flex items-center gap-4">
       <div className="relative w-8 h-8 md:w-5 md:h-5">
         <Image src="/cart.png" alt="" fill />
+        {totalQuantity > 0 && (
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full px-1 text-xs">
+            {totalQuantity}
+          </span>
+        )}
       </div>
-      <span>Корзина {count}</span>
+      <span>Корзина</span>
     </Link>
   );
 }

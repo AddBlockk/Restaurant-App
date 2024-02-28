@@ -22,12 +22,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const storeRef = useRef<AppStore>();
-  // if (!storeRef.current) {
-  //   storeRef.current = makeStore();
-  // storeRef.current.dispatch(counterSlice(count))
-  // }
-
   return (
     <html lang="en">
       <body className={inter.className}>

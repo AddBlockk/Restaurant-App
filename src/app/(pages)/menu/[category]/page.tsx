@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import CategoryPage from "@/app/components/Categories";
 import Loading from "../loading";
-// import Skeleton from "./Skeleton";
 
 function Categories() {
   const [loading, setLoading] = useState(true);

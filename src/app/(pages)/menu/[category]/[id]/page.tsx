@@ -4,13 +4,21 @@ import { useParams } from "next/navigation";
 import Price from "@/app/components/Price";
 import { featuredProducts } from "@/data";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { reset } from "@/app/lib/features/counter/counterSlice";
 
 const ProductPage = () => {
   const { id } = useParams();
   const product =
     featuredProducts.find((item) => item.id === Number(id)) ||
     featuredProducts[0];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(reset());
+  }, [dispatch, id]);
 
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-red-500 md:flex-row md:gap-8 md:items-center">
@@ -33,6 +41,8 @@ const ProductPage = () => {
           price={product.price}
           id={product.id}
           options={product.options}
+          title={product.title}
+          img={product.img}
         />
       </div>
     </div>

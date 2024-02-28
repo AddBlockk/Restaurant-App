@@ -42,7 +42,6 @@ export default function Loading() {
             width={40}
             baseColor="#999"
           />
-          fsdfsd
           {filteredFoods().map((item) => (
             <div
               className="w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group odd:bg-fuchsia-50"
