@@ -1,5 +1,3 @@
-"use client";
-
 import { burgers, menu, pizzas } from "@/data";
 import Link from "next/link";
 import React, { Suspense, useState } from "react";
