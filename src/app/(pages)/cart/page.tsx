@@ -21,12 +21,14 @@ export default function CartPage() {
         {cartItems.map((item) => (
           <div key={item.id} className="flex items-center justify-between mb-4">
             <Image src={item.img} alt="" width={100} height={100} />
-            <div className="">
-              <h1 className="uppercase text-xl font-bold">{item.title}</h1>
-              <span>{item.options ? item.options[0].title : ""}</span>
+            <div className="flex-1 flex flex-col justify-center mx-4">
+              <h1 className="uppercase text-xl font-bold mb-1">{item.title}</h1>
+              <span className="mb-1">
+                {item.options ? item.options[0].title : ""}
+              </span>
               <div>Количество: {item.quantity}</div>
             </div>
-            <h2 className="font-bold">₽ {item.price * item.quantity}</h2>
+            <h2 className="font-bold mr-4">₽ {item.price * item.quantity}</h2>
             <span
               className="cursor-pointer"
               onClick={() => handleRemoveItem(item.id)}>

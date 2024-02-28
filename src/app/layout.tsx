@@ -5,10 +5,8 @@ import { Inter } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import { useRef } from "react";
-// import { makeStore, AppStore } from "./lib/store";
 import { Provider } from "react-redux";
 import { Providers } from "./lib/provider";
-// import { counterSlice } from "./lib/features/counter/counterSlice";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,11 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
         <Providers>
           <Notification />
           <Navbar />
-          {children}
+          <div className="flex-1">{children}</div>
           <Footer />
         </Providers>
       </body>
