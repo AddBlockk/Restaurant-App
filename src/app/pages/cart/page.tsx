@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 
-const CartPage = () => {
+export const CartPage = () => {
   return (
     // <div className="h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-red-500 lg:flex-row">
     //   <div className="h-1/2 p-4 flex flex-col justify-center overflow-scroll lg:h-full lg:w-2/3 2xl:w-1/2 lg:px-20 xl:px-40">
@@ -38,5 +38,3 @@ const CartPage = () => {
     <></>
   );
 };
-
-export default CartPage;
