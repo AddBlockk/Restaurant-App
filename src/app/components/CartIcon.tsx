@@ -4,12 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import Price from "./Price";
-import type { RootState } from "@/app/redux/store";
+import type { RootState } from "@/app/lib/store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  decrement,
-  increment,
-} from "@/app/redux/features/counter/counterSlice";
+import { decrement, increment } from "@/app/lib/features/counter/counterSlice";
 
 export function CartIcon() {
   const count = useSelector((state: RootState) => state.counter.value);

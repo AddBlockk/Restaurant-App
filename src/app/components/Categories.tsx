@@ -6,9 +6,9 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import FoodCartButton from "./FoodCartButton";
-import type { RootState } from "@/app/redux/store";
+import type { RootState } from "@/app/lib/store";
 import { useSelector, useDispatch } from "react-redux";
-import { increment } from "@/app/redux/features/counter/counterSlice";
+import { increment } from "@/app/lib/features/counter/counterSlice";
 
 const CategoryPage = () => {
   const [categoryName, setCategoryName] = useState("");

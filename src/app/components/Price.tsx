@@ -1,12 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import type { RootState } from "@/app/redux/store";
+import type { RootState } from "@/app/lib/store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  decrement,
-  increment,
-} from "@/app/redux/features/counter/counterSlice";
+import { decrement, increment } from "@/app/lib/features/counter/counterSlice";
 
 type Props = {
   price: number;

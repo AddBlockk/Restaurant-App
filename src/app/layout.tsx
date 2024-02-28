@@ -4,8 +4,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
-import { store } from "./redux/store";
+import { useRef } from "react";
+// import { makeStore, AppStore } from "./lib/store";
 import { Provider } from "react-redux";
+import { Providers } from "./lib/provider";
+// import { counterSlice } from "./lib/features/counter/counterSlice";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,17 +22,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const storeRef = useRef<AppStore>();
+  // if (!storeRef.current) {
+  //   storeRef.current = makeStore();
+  // storeRef.current.dispatch(counterSlice(count))
+  // }
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider store={store}>
-          <div>
-            <Notification />
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
-        </Provider>
+        <Providers>
+          <Notification />
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
