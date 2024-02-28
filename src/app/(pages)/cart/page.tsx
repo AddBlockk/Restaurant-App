@@ -26,9 +26,7 @@ export default function CartPage() {
               <span>{item.options ? item.options[0].title : ""}</span>
               <div>Количество: {item.quantity}</div>
             </div>
-            <h2 className="font-bold">
-              ₽{(item.price * item.quantity).toFixed(2)}
-            </h2>
+            <h2 className="font-bold">₽ {item.price * item.quantity}</h2>
             <span
               className="cursor-pointer"
               onClick={() => handleRemoveItem(item.id)}>
@@ -41,7 +39,7 @@ export default function CartPage() {
         <div className="flex justify-between">
           <span className="">Всего продукции ({cartItems.length})</span>
           <span className="">
-            ₽
+            ₽{" "}
             {cartItems.reduce(
               (total, item) => total + item.price * item.quantity,
               0
@@ -56,7 +54,7 @@ export default function CartPage() {
         <div className="flex justify-between">
           <span className="">Общая стоимость</span>
           <span className="font-bold">
-            ₽
+            ₽{" "}
             {cartItems.reduce(
               (total, item) => total + item.price * item.quantity,
               0

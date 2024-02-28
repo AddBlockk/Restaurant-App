@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import type { RootState } from "@/app/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "@/app/lib/features/counter/counterSlice";
-import { addItem } from "@/app/lib/features/cart/cartSlice";
+import { addItem, updateItem } from "@/app/lib/features/cart/cartSlice";
 
 type Props = {
   price: number;
@@ -14,11 +14,12 @@ type Props = {
   options?: { title: string; additionalPrice: number }[];
 };
 
-const Price = ({ price, id, options, img, title }: Props) => {
+const Price = ({ price, id, title, img, options }: Props) => {
   const [total, setTotal] = useState(price);
   const [selected, setSelected] = useState(0);
   const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
 
   useEffect(() => {
     setTotal(
@@ -28,23 +29,49 @@ const Price = ({ price, id, options, img, title }: Props) => {
   }, [count, selected, options, price]);
 
   const addToCart = () => {
-    dispatch(
-      addItem({
-        id,
-        quantity: count,
-        price: total / count,
-        title,
-        img,
-        options: options
-          ? [
-              {
-                title: options[selected].title,
-                additionalPrice: options[selected].additionalPrice,
-              },
-            ]
-          : undefined,
-      })
-    );
+    const newItem = {
+      id,
+      title,
+      img,
+      price: total / count,
+      quantity: count,
+      options: options
+        ? [
+            {
+              title: options[selected].title,
+              additionalPrice: options[selected].additionalPrice,
+            },
+          ]
+        : undefined,
+    };
+
+    const cartItem = cartItems.find((item) => item.id === id);
+
+    if (cartItem) {
+      updateItemSize();
+    } else {
+      dispatch(addItem(newItem));
+    }
+  };
+
+  const updateItemSize = () => {
+    const updatedItem = {
+      id,
+      title,
+      img,
+      price: total / count,
+      quantity: count,
+      options: options
+        ? [
+            {
+              title: options[selected].title,
+              additionalPrice: options[selected].additionalPrice,
+            },
+          ]
+        : undefined,
+    };
+
+    dispatch(updateItem(updatedItem));
   };
 
   return (
@@ -74,9 +101,15 @@ const Price = ({ price, id, options, img, title }: Props) => {
           </div>
         </div>
         <button
-          onClick={addToCart}
+          onClick={() => {
+            if (cartItems.find((item) => item.id === id)) {
+              updateItemSize();
+            } else {
+              addToCart();
+            }
+          }}
           className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500">
-          В корзину
+          {cartItems.find((item) => item.id === id) ? "Обновить" : "В корзину"}
         </button>
       </div>
     </div>
