@@ -1,5 +1,3 @@
-"use client";
-
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/app/redux/features/counter/counterSlice";
 
