@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import Price from "../components/Price";
+import Price from "./Price";
 import type { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import {

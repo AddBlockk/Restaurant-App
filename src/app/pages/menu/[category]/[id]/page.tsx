@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import Price from "@/components/Price";
+import Price from "@/app/components/Price";
 import { featuredProducts } from "@/data";
 import Image from "next/image";
 import React from "react";

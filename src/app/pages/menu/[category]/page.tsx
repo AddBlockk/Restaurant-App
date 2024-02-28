@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import CategoryPage from "../../../components/Categories";
+import CategoryPage from "@/app/components/Categories";
 import Loading from "../loading";
 // import Skeleton from "./Skeleton";
 
