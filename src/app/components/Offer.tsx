@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Offer = () => {
@@ -13,9 +14,11 @@ const Offer = () => {
           процессно-ориентированных методов расширения прав и возможностей.
           Быстро проводите параллель.
         </p>
-        <button className="bg-red-500 text-white rounded-md py-3 px-6 hover:bg-red-900 hover:ease-in duration-100">
+        <Link
+          href={"/menu"}
+          className="bg-red-500 text-white rounded-md py-3 px-6 hover:bg-red-900 hover:ease-in duration-100">
           Заказывайте прямо сейчас
-        </button>
+        </Link>
       </div>
       <div className="flex-1 w-full relative md:h-full">
         <Image src="/offerProduct.png" alt="" fill className="object-contain" />

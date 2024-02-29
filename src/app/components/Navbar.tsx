@@ -13,16 +13,18 @@ const Navbar = () => {
         <Link href="/menu">Меню</Link>
         <Link href="/">Контакты</Link>
       </div>
-      <div className="text-xl md:font-bold flex-1 md:text-center">
+      <div className="text-xl md:font-bold flex-1 md:text-center ">
         <Link href="/">Boltach</Link>
       </div>
       <div className="md:hidden">
         <Menu />
       </div>
       <div className="hidden md:flex gap-4 items-center justify-end flex-1">
-        <div className="md:absolute top-3 r-2 lg:static flex items-center gap-2 cursor-pointer bg-orange-300 px-1 rounded-md">
+        <div className="absolute top-3 r-2 flex 2xl:static items-center gap-2 cursor-pointer bg-orange-300 px-1 rounded-md user-select-none">
           <Image src="/phone.png" alt="" width={20} height={20} />
-          <span>+7 (908) 611 83 72</span>
+          <a href="tel:+79086118372">
+            <span>+7 (908) 611 83 72</span>
+          </a>
         </div>
         {!user ? (
           <Link href="/login">Логин</Link>

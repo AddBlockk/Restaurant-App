@@ -49,10 +49,14 @@ const CategoryPage = () => {
               <Image src={item.img} alt="" fill className="object-contain" />
             </div>
           )}
-          <div className="flex items-center justify-between font-bold">
-            <h1 className="text-2xl uppercase p-2">{item.title}</h1>
-            <h2 className="group-hover:hidden text-xl">₽{item.price}</h2>
-            <FoodCartButton />
+          <div className="flex flex-col gap-3 items-end justify-between font-bold">
+            <h1 className="text-2xl uppercase w-[100%] break-words hyphens-manual">
+              {item.title}
+            </h1>
+            <div className="h-[40px] ">
+              <h2 className="group-hover:hidden text-xl">₽{item.price}</h2>
+              <FoodCartButton />
+            </div>
           </div>
         </Link>
       ))}

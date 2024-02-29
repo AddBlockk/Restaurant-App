@@ -1,44 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CartIcon from "./CartIcon";
 
 const links = [
-  { id: 1, title: "Homepage", url: "/" },
-  { id: 2, title: "Menu", url: "/menu" },
-  { id: 3, title: "Working Hours", url: "/" },
-  { id: 4, title: "Contact", url: "/" },
+  { id: 1, title: "Главная", url: "/" },
+  { id: 2, title: "Меню", url: "/menu" },
+  { id: 3, title: "Контакты", url: "/" },
 ];
 
 const Menu = () => {
   const [open, setOpen] = useState(false);
 
-  // TEMPORARY
-  const user = false;
+  const user = true;
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [open]);
+
   return (
     <div>
-      {/* LONG WAY */}
-      {!open ? (
-        <Image
-          src="/open.png"
-          alt=""
-          width={20}
-          height={20}
-          onClick={() => setOpen(true)}
-        />
-      ) : (
-        <Image
-          src="/close.png"
-          alt=""
-          width={20}
-          height={20}
-          onClick={() => setOpen(false)}
-        />
-      )}
-
-      {/* SHORTCUT */}
       <Image
         src={open ? "/close.png" : "/open.png"}
         alt=""
@@ -55,22 +46,10 @@ const Menu = () => {
             </Link>
           ))}
 
-          {/* LONG WAY */}
-          {/* {!user ? (
-            <Link href="/login" onClick={() => setOpen(false)}>
-              Login
-            </Link>
-          ) : (
-            <Link href="/orders" onClick={() => setOpen(false)}>
-              Orders
-            </Link>
-          )} */}
-
-          {/* SHORTCUT */}
           <Link
             href={user ? "/orders" : "login"}
             onClick={() => setOpen(false)}>
-            {user ? "Orders" : "Login"}
+            {user ? "Регистрация" : "Логин"}
           </Link>
           <Link href="/cart" onClick={() => setOpen(false)}>
             <CartIcon />
