@@ -77,11 +77,11 @@ const Price = ({ price, id, title, img, options }: Props) => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold">₽{total}</h2>
-      <div className="flex gap-4 ">
+      <div className="flex flex-col sm:flex-row gap-4 text-sm">
         {options?.map((option, index) => (
           <button
             key={option.title}
-            className="min-w-[6rem] p-2 ring-1 ring-red-400 rounded-md"
+            className="min-w-[6rem] py-2 ring-1 ring-red-400 rounded-md"
             style={{
               background: selected === index ? "rgb(248 113 113)" : "white",
               color: selected === index ? "white" : "red",
@@ -91,8 +91,8 @@ const Price = ({ price, id, title, img, options }: Props) => {
           </button>
         ))}
       </div>
-      <div className="flex justify-between items-center">
-        <div className="flex justify-between w-full p-3 ring-1 ring-red-500">
+      <div className="flex flex-col gap-5 justify-between items-center sm:flex-row sm:gap-0">
+        <div className="flex justify-between w-[100%] p-3 ring-1 ring-red-500">
           <span>Количество</span>
           <div className="flex gap-4 items-center">
             <button onClick={() => dispatch(decrement())}>{"<"}</button>
@@ -108,7 +108,7 @@ const Price = ({ price, id, title, img, options }: Props) => {
               addToCart();
             }
           }}
-          className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500">
+          className="uppercase sm:w-56 bg-red-500 text-white p-3 ring-1 ring-red-500 w-[100%]">
           {cartItems.find((item) => item.id === id) ? "Обновить" : "В корзину"}
         </button>
       </div>

@@ -20,7 +20,7 @@ const Navbar = () => {
         <Menu />
       </div>
       <div className="hidden md:flex gap-4 items-center justify-end flex-1">
-        <div className="absolute top-3 r-2 flex 2xl:static items-center gap-2 cursor-pointer bg-orange-300 px-1 rounded-md user-select-none">
+        <div className="absolute top-3 r-2 flex 2xl:static items-center gap-2 cursor-pointer bg-orange-300 px-1 rounded-lg user-select-none">
           <Image src="/phone.png" alt="" width={20} height={20} />
           <a href="tel:+79086118372">
             <span>+7 (908) 611 83 72</span>

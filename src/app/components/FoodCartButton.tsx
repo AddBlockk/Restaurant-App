@@ -1,7 +1,7 @@
 const FoodCartButton = () => {
   return (
     <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">
-      Добавиить в корзину
+      Добавить в корзину
     </button>
   );
 };

@@ -1,12 +1,9 @@
-import { burgers, menu, pizzas } from "@/data";
+import { menu } from "@/data";
 import Link from "next/link";
-import React, { Suspense, useState } from "react";
-import Loading from "./loading";
-import Skeleton from "react-loading-skeleton";
+import React from "react";
 
 const MenuPage = () => {
   return (
-    // <Suspense fallback={<Loading />}>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 lg:px-20 xl:px-40 items-center ">
       {menu.map((category) => (
         <Link
@@ -31,9 +28,7 @@ const MenuPage = () => {
           </div>
         </Link>
       ))}
-      <Skeleton />
     </div>
-    // </Suspense>
   );
 };
 
