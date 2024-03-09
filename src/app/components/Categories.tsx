@@ -14,7 +14,7 @@ const CategoryPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    });
   });
 
   const [categoryName, setCategoryName] = useState("");
@@ -48,7 +48,7 @@ const CategoryPage = () => {
         <>
           {filteredFoods().map((item) => (
             <Link
-              className="group w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group odd:bg-fuchsia-50"
+              className="group w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group"
               href={`/menu/${categoryName}/${item.id}`}
               key={item.id}>
               <div className="relative h-[80%]">

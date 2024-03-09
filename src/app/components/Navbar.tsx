@@ -3,9 +3,9 @@ import Menu from "./Menu";
 import Link from "next/link";
 import CartIcon from "./CartIcon";
 import Image from "next/image";
+import LogoutButton from "./LogoutButton";
 
-const Navbar = () => {
-  const user = false;
+function Navbar() {
   return (
     <div className="h-12 text-red-500 p-4 flex items-center justify-between border-b-2 border-b-red-500 uppercase md:h-24 lg:px-20 xl:px-40">
       <div className="hidden md:flex gap-4 flex-1">
@@ -20,21 +20,17 @@ const Navbar = () => {
         <Menu />
       </div>
       <div className="hidden md:flex gap-4 items-center justify-end flex-1">
-        <div className="absolute top-3 r-2 flex 2xl:static items-center gap-2 cursor-pointer bg-orange-300 px-1 rounded-lg user-select-none">
+        {/* <div className="hidden top-3 r-2 lg:flex 2xl:static items-center gap-2 cursor-pointer bg-orange-300 px-1 rounded-lg user-select-none">
           <Image src="/phone.png" alt="" width={20} height={20} />
           <a href="tel:+79086118372">
             <span>+7 (908) 611 83 72</span>
           </a>
-        </div>
-        {!user ? (
-          <Link href="/login">Логин</Link>
-        ) : (
-          <Link href="/orders">Заказы</Link>
-        )}
+        </div> */}
         <CartIcon />
+        <LogoutButton />
       </div>
     </div>
   );
-};
+}
 
 export default Navbar;

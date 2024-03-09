@@ -27,7 +27,7 @@ export function CartIcon() {
       <div className="relative w-8 h-8 md:w-5 md:h-5">
         <Image src="/cart.png" alt="" fill />
         {totalQuantity > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full px-1 text-xs  border-black border-[1px]">
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full px-1 text-xs border-black border-[1px]">
             {totalQuantity}
           </span>
         )}
