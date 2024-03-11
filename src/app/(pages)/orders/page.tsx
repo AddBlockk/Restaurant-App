@@ -1,8 +1,5 @@
-// import DefaultLayout from "../_layout/default";
-
 export default function OrdersPage() {
   return (
-    // <DefaultLayout>
     <div className="p-4 lg:px-20 xl:px-40">
       <table className="w-full border-separate border-spacing-3">
         <thead>
@@ -45,6 +42,5 @@ export default function OrdersPage() {
         </tbody>
       </table>
     </div>
-    // </DefaultLayout>
   );
 }
