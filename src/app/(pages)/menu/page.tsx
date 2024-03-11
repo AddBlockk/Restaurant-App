@@ -1,9 +1,36 @@
-import { menu } from "@/data";
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../_layout/default";
+import { get, ref } from "firebase/database";
+import { database } from "@/app/firebase/config";
+
+interface Menu {
+  id: number;
+  slug: string;
+  title: string;
+  desc: string;
+  img: string;
+  color: string;
+}
+[];
 
 const MenuPage = () => {
+  const [menu, setMenu] = useState<Menu[]>([]);
+
+  useEffect(() => {
+    const menuRef = ref(database, "menu");
+    get(menuRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const menuArray: Menu[] = Object.values(snapshot.val());
+        setMenu(menuArray);
+      } else {
+        console.log("Нету данных");
+      }
+    });
+  });
+
   return (
     <DefaultLayout>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 lg:px-20 xl:px-40 items-center ">

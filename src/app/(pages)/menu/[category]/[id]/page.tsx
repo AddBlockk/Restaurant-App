@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import Price from "@/app/components/Price";
 import { featuredProducts } from "@/data";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { reset } from "@/app/lib/features/counter/counterSlice";
 import DefaultLayout from "@/app/(pages)/_layout/default";

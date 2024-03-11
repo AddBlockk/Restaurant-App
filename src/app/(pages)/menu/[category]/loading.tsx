@@ -1,5 +1,3 @@
-"use client";
-
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 export default function Loading() {

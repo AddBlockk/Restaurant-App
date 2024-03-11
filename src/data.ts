@@ -524,39 +524,3 @@ export const pizzas: Products = [
     ],
   },
 ];
-
-type Menu = {
-  id: number;
-  slug: string;
-  title: string;
-  desc?: string;
-  img?: string;
-  color: string;
-}[];
-
-export const menu: Menu = [
-  {
-    id: 1,
-    slug: "pasta",
-    title: "Итальянская паста",
-    desc: "Насладитесь вкусом совершенства с помощью нашего изысканного меню итальянской пасты ручной работы.",
-    img: "/temporary/m1.png",
-    color: "white",
-  },
-  {
-    id: 2,
-    slug: "burgers",
-    title: "Сочные бургеры",
-    desc: "Бургер Блаженство: Сочные котлеты, смелые вкусы и изобилие изысканных начинок.",
-    img: "/temporary/m2.png",
-    color: "black",
-  },
-  {
-    id: 3,
-    slug: "pizzas",
-    title: "Сырная пицца",
-    desc: "Райская пицца: неотразимые ломтики, аппетитные начинки и сырное совершенство.",
-    img: "/temporary/m3.png",
-    color: "white",
-  },
-];
