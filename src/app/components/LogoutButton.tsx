@@ -3,7 +3,7 @@
 import React from "react";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
+import { auth } from "@/app/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
 
 const LogoutButton = () => {

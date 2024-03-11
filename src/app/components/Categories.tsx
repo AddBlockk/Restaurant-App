@@ -6,7 +6,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import FoodCartButton from "./FoodCartButton";
 import Loading from "../(pages)/menu/[category]/loading";
 import { get, ref } from "firebase/database";
-import { database } from "@/app/firebase/config";
+import { database } from "@/app/firebase/firebaseConfig";
 
 type Category = {
   name: string;

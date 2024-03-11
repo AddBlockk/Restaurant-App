@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import DefaultLayout from "../_layout/default";
 import { get, ref } from "firebase/database";
-import { database } from "@/app/firebase/config";
+import { database } from "@/app/firebase/firebaseConfig";
 
 interface Menu {
   id: number;
