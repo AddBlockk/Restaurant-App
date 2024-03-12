@@ -1,9 +1,33 @@
-import { featuredProducts } from "@/data";
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { get, ref } from "firebase/database";
+import { database } from "../firebase/firebaseConfig";
+
+export type Product = {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  price: number;
+  options?: { title: string; additionalPrice: number }[];
+};
 
 const Featured = () => {
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const featuredProductsRef = ref(database, "featuredProducts");
+    get(featuredProductsRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const featuredProductsArray: Product[] = Object.values(snapshot.val());
+        setFeaturedProducts(featuredProductsArray);
+      } else {
+        console.log("Нету данных");
+      }
+    });
+  });
   return (
     <div className="overflow-x-scroll text-red-500">
       <div className="w-max flex">
