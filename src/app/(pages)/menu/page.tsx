@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-// import DefaultLayout from "../_layout/default";
 import { get, ref } from "firebase/database";
 import { database } from "@/app/firebase/firebaseConfig";
 
@@ -32,7 +31,6 @@ const MenuPage = () => {
   });
 
   return (
-    // <DefaultLayout>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 lg:px-20 xl:px-40 items-center ">
       {menu.map((category) => (
         <Link
@@ -58,7 +56,6 @@ const MenuPage = () => {
         </Link>
       ))}
     </div>
-    // </DefaultLayout>
   );
 };
 

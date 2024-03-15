@@ -6,6 +6,7 @@ import Link from "next/link";
 import CartIcon from "./CartIcon";
 import Image from "next/image";
 import LogoutButton from "./LogoutButton";
+import Cookies from "js-cookie";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { signOut } from "firebase/auth";
@@ -23,6 +24,7 @@ function Navbar() {
     await signOut(auth);
     sessionStorage.removeItem("user");
     router.push("/");
+    Cookies.remove("user");
   };
 
   const handleOpenSignInModal = () => {

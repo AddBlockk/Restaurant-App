@@ -10,24 +10,24 @@ import {
   TrafficControl,
   ZoomControl,
 } from "@pbe/react-yandex-maps";
+
 export default function Maps() {
   const defaultState = {
     center: [46.355489228569915, 48.07389460345459],
     zoom: 17,
   };
-  {
-    return (
-      <div id="map">
-        <YMaps>
-          <Map defaultState={defaultState} width="100%" height="50vh">
-            <Placemark geometry={[46.355489228569915, 48.07389460345459]} />
-            <FullscreenControl options={{ float: "left" }} />
-            <ZoomControl />
-            <GeolocationControl options={{ float: "right" }} />
-            <TrafficControl />
-          </Map>
-        </YMaps>
-      </div>
-    );
-  }
+
+  return (
+    <div id="map">
+      <YMaps query={{ apikey: "c915b1b2-4f34-4cb0-99b8-a8a7ffed9b29" }}>
+        <Map defaultState={defaultState} width="100%" height="50vh">
+          <Placemark geometry={[46.355489228569915, 48.07389460345459]} />
+          <FullscreenControl options={{ float: "left" }} />
+          <ZoomControl />
+          <GeolocationControl options={{ float: "right" }} />
+          <TrafficControl />
+        </Map>
+      </YMaps>
+    </div>
+  );
 }

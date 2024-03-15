@@ -25,7 +25,12 @@ export function CartIcon() {
   return (
     <Link href="/cart" className="flex items-center gap-4">
       <div className="relative w-8 h-8 md:w-5 md:h-5">
-        <Image src="/cart.png" alt="" fill />
+        <Image
+          src="/cart.png"
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
         {totalQuantity > 0 && (
           <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full px-1 text-xs border-black border-[1px]">
             {totalQuantity}

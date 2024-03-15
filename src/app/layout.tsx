@@ -1,4 +1,3 @@
-import Notification from "@/app/components/Notification";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -22,7 +21,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-screen flex flex-col`}>
         <Providers>
-          {/* <Notification /> */}
           <Navbar />
           <div className="flex-1">{children}</div>
           <Footer />

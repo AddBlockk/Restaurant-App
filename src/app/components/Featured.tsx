@@ -37,7 +37,13 @@ const Featured = () => {
             className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh] gap-[20px]">
             {item.img && (
               <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
-                <Image src={item.img} alt="" fill className="object-contain" />
+                <Image
+                  src={item.img}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-contain"
+                />
               </div>
             )}
             <div className=" flex-1 flex flex-col items-center justify-center text-center gap-4">

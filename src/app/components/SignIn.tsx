@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import Modal from "./Modal";
 
@@ -17,22 +18,39 @@ const SignInModal = ({ isOpen, onClose, toggleSignIn }: SignInModalProps) => {
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
 
+  const [error, setError] = useState("");
+
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
       console.log({ res });
-      sessionStorage.setItem("user", "true");
-      setEmail("");
-      setPassword("");
-      router.push("/");
-      onClose();
+      if (res?.user) {
+        sessionStorage.setItem("user", "true");
+        setEmail("");
+        setPassword("");
+        Cookies.set("user", "true", { expires: 7 }); // Cookie будет храниться в течение 7 дней
+        const userCookie = Cookies.get("user");
+        console.log(userCookie); // Выведет "true", если cookie сохранено
+        onClose();
+      }
     } catch (e) {
       console.error(e);
+      setError("Неправильный email или пароль");
     }
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Предотвратить отправку формы по умолчанию
+    handleSignIn(); // Вызвать функцию входа
+  };
+
+  const handleClose = () => {
+    onClose();
+    setError("");
+  };
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <div className="relative items-center flex mb-5">
         <h1 className="text-red-500 text-2xl">Вход</h1>
         <button
@@ -53,25 +71,39 @@ const SignInModal = ({ isOpen, onClose, toggleSignIn }: SignInModalProps) => {
           </svg>
         </button>
       </div>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
-      />
-      <button
-        onClick={handleSignIn}
-        className="w-full p-3 bg-red-500 rounded text-white hover:bg-red-600 transition duration-300 ease-in-out">
-        Войти
-      </button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+          autoComplete="username"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+          autoComplete="current-password"
+        />
+        <button
+          type="submit"
+          className="w-full p-3 bg-red-500 rounded text-white hover:bg-red-600 transition duration-300 ease-in-out">
+          Войти
+        </button>
+        {error && (
+          <>
+            <p className="text-red-500">{error}</p>
+            <button
+              onClick={handleClose}
+              className="text-red-500 hover:text-red-600 transition duration-300 ease-in-out">
+              ОК
+            </button>
+          </>
+        )}
+      </form>
       <Link
         href="#"
         onClick={(e) => {

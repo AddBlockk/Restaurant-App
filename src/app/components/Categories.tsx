@@ -69,6 +69,8 @@ const CategoryPage = () => {
                     src={item.img}
                     alt=""
                     fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-contain group-hover:scale-90 transition duration-300 transform"
                   />
                 </div>
