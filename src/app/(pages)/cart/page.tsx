@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/lib/store";
 import { useDispatch } from "react-redux";
 import { removeItem } from "@/app/lib/features/cart/cartSlice";
-// import DefaultLayout from "../_layout/default";
 
 export default function CartPage() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -17,7 +16,6 @@ export default function CartPage() {
   };
 
   return (
-    // <DefaultLayout>
     <div className="h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-red-500 lg:flex-row">
       <div className="h-1/2 p-4 flex flex-col justify-center overflow-scroll lg:h-full lg:w-2/3 2xl:w-1/2 lg:px-20 xl:px-40">
         {cartItems.map((item) => (
@@ -70,6 +68,5 @@ export default function CartPage() {
         </button>
       </div>
     </div>
-    // </DefaultLayout>
   );
 }

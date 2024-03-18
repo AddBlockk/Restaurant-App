@@ -4,7 +4,7 @@ import { auth } from "@/app/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import Modal from "./Modal";
+import Modal from "./Modal/Modal";
 
 interface SignInModalProps {
   isOpen: boolean;
@@ -55,7 +55,7 @@ const SignInModal = ({ isOpen, onClose, toggleSignIn }: SignInModalProps) => {
         <h1 className="text-red-500 text-2xl">Вход</h1>
         <button
           onClick={onClose}
-          className="absolute right-0 text-gray-600 hover:text-red-500 transition duration-300 ease-in-out">
+          className="absolute right-0 text-gray-600 hover:text-red-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

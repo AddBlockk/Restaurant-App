@@ -1,52 +1,132 @@
 "use client";
-
-import { useParams } from "next/navigation";
+import "react-loading-skeleton/dist/skeleton.css";
+import { useParams, usePathname } from "next/navigation";
 import Price from "@/app/components/Price";
-import { featuredProducts } from "@/data";
+import { Suspense, useEffect, useState } from "react";
+import { get, ref } from "firebase/database";
+import { database } from "@/app/firebase/firebaseConfig";
 import Image from "next/image";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { reset } from "@/app/lib/features/counter/counterSlice";
+import Loading from "./loading";
+
+interface Option {
+  additionalPrice: number;
+  title: string;
+  id: number;
+}
+
+interface Product {
+  id: number;
+  slug: string;
+  title: string;
+  desc: string;
+  img: string;
+  color: string;
+  price: number;
+  optionsId: number[];
+}
+
+interface Category {
+  name: string;
+  items: Product[];
+}
+
+interface MenuItem {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  slug: string;
+  color: string;
+  category: Category;
+}
+
+interface Data {
+  menu: MenuItem[];
+}
 
 const ProductPage = () => {
-  const { id } = useParams();
-  const product =
-    featuredProducts.find((item) => item.id === Number(id)) ||
-    featuredProducts[0];
+  const pathname = usePathname();
+  console.log(pathname);
 
-  const dispatch = useDispatch();
+  const id = pathname.split("/").pop() || "";
+
+  const [data, setData] = useState<Data | null>(null);
+  const [options, setOptions] = useState<Option[]>([]);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(reset());
-  }, [dispatch, id]);
+    const fetchData = async () => {
+      const optionsRef = ref(database, "options");
+      const menuRef = ref(database, "menu");
+
+      const [optionsSnapshot, menuSnapshot] = await Promise.all([
+        get(optionsRef),
+        get(menuRef),
+      ]);
+
+      const optionsData = optionsSnapshot.val() || [];
+      const menuData = menuSnapshot.val() || [];
+
+      setOptions(optionsData);
+      setData({
+        menu: menuData,
+      });
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      const product = data.menu
+        .flatMap((item) => item.category.items)
+        .find((item) => item.id === parseInt(id));
+
+      if (product) {
+        setProduct(product);
+      }
+    }
+  }, [data, id]);
 
   return (
-    <div className="p-4 lg:px-20 xl:px-40 flex flex-col justify-center items-center text-red-500 md:flex-row md:gap-8">
-      {product.img && (
-        <div className="overflow-hidden flex justify-center w-[100%] dm:w-[50%]">
-          <Image
-            src={product.img}
-            alt=""
-            className="object-contain transition-all duration-500 hover:rotate-[60deg] hover:scale-90"
-            width={600}
-            height={600}
-          />
+    <Suspense fallback={<Loading />}>
+      {product && (
+        <div className="p-4 lg:px-20 xl:px-40 flex flex-col justify-center items-center text-red-500 md:flex-row md:gap-8">
+          <div className="overflow-hidden flex justify-center w-[100%] dm:w-[50%]">
+            <Image
+              src={product.img}
+              alt=""
+              className="object-contain transition-all duration-500 hover:rotate-[60deg] hover:scale-90"
+              width={600}
+              height={600}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
+            />
+          </div>
+          <div className="h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8 dm:w-[50%]">
+            <h1 className="text-2xl font-bold uppercase xl:text-5xl break-all hyphens-manual w-full mb-[10px]">
+              {product.title}
+            </h1>
+            <p>{product.desc}</p>
+            <Price
+              price={product.price}
+              id={product.id}
+              options={
+                product.optionsId
+                  ? options.filter((option) =>
+                      product.optionsId.includes(option.id)
+                    )
+                  : []
+              }
+              title={product.title}
+              img={product.img}
+            />
+          </div>
         </div>
       )}
-      <div className="h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8 dm:w-[50%]">
-        <h1 className="text-3xl font-bold uppercase xl:text-5xl">
-          {product.title}
-        </h1>
-        <p>{product.desc}</p>
-        <Price
-          price={product.price}
-          id={product.id}
-          options={product.options}
-          title={product.title}
-          img={product.img}
-        />
-      </div>
-    </div>
+    </Suspense>
   );
 };
 

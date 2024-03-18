@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -29,7 +30,12 @@ const Featured = () => {
     });
   });
   return (
-    <div className="overflow-x-scroll text-red-500">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      whileInView={{ opacity: 1 }}
+      className="overflow-x-scroll text-red-500">
       <div className="w-max flex">
         {featuredProducts.map((item) => (
           <div
@@ -61,7 +67,7 @@ const Featured = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

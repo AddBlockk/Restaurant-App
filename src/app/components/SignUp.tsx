@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/firebaseConfig";
 import Link from "next/link";
-import Modal from "./Modal";
+import Modal from "./Modal/Modal";
 
 interface SignUpProps {
   isOpen: boolean;
