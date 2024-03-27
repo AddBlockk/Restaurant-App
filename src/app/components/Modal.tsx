@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { modalVariants, backgroundVariants } from "./modalAnimation";
+import { modalVariants, backgroundVariants } from "./Animations";
 
 interface ModalProps extends ComponentPropsWithoutRef<"div"> {
   isOpen: boolean;

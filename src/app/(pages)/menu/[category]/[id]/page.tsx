@@ -1,55 +1,17 @@
 "use client";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Price from "@/app/components/Price";
 import { Suspense, useEffect, useState } from "react";
 import { get, ref } from "firebase/database";
 import { database } from "@/app/firebase/firebaseConfig";
 import Image from "next/image";
 import Loading from "./loading";
-
-interface Option {
-  additionalPrice: number;
-  title: string;
-  id: number;
-}
-
-interface Product {
-  id: number;
-  slug: string;
-  title: string;
-  desc: string;
-  img: string;
-  color: string;
-  price: number;
-  optionsId: number[];
-}
-
-interface Category {
-  name: string;
-  items: Product[];
-}
-
-interface MenuItem {
-  id: number;
-  title: string;
-  desc: string;
-  img: string;
-  slug: string;
-  color: string;
-  category: Category;
-}
-
-interface Data {
-  menu: MenuItem[];
-}
+import { Data, Product, Option } from "../../../../../../types/category";
 
 const ProductPage = () => {
   const pathname = usePathname();
-  console.log(pathname);
-
   const id = pathname.split("/").pop() || "";
-
   const [data, setData] = useState<Data | null>(null);
   const [options, setOptions] = useState<Option[]>([]);
   const [product, setProduct] = useState<Product | null>(null);

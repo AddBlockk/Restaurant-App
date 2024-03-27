@@ -5,16 +5,7 @@ import { get, ref } from "firebase/database";
 import { database } from "@/app/firebase/firebaseConfig";
 import Loading from "./loading";
 import "react-loading-skeleton/dist/skeleton.css";
-
-interface Menu {
-  id: number;
-  slug: string;
-  title: string;
-  desc: string;
-  img: string;
-  color: string;
-}
-[];
+import { Menu } from "../../../../types/category";
 
 const MenuPage = () => {
   const [menu, setMenu] = useState<Menu[]>([]);
@@ -26,13 +17,13 @@ const MenuPage = () => {
       if (snapshot.exists()) {
         const menuArray: Menu[] = Object.values(snapshot.val());
         setMenu(menuArray);
-        setLoading(false); // установить loading в false после загрузки данных
+        setLoading(false);
       } else {
         console.log("Нету данных");
-        setLoading(false); // также установить loading в false, если данных нет
+        setLoading(false);
       }
     });
-  }, []); // пустой массив зависимостей, чтобы useEffect выполнялся только при монтировании компонента
+  }, []);
 
   if (loading) return <Loading />;
 
@@ -43,7 +34,7 @@ const MenuPage = () => {
           <Link
             href={`/menu/${category.slug}`}
             key={category.id}
-            className="relative bg-cover p-8 "
+            className="relative bg-cover p-8"
             style={{
               backgroundImage: `url(${category.img})`,
             }}>

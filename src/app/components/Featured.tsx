@@ -5,36 +5,43 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { get, ref } from "firebase/database";
 import { database } from "../firebase/firebaseConfig";
+import { fadeIn } from "./Animations";
 
-export type Product = {
+interface Product {
   id: number;
   title: string;
   desc: string;
   img: string;
   price: number;
-  options?: { title: string; additionalPrice: number }[];
-};
+  optionsId?: number[];
+}
 
 const Featured = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    const featuredProductsRef = ref(database, "featuredProducts");
+    const featuredProductsRef = ref(database, "menu");
     get(featuredProductsRef).then((snapshot) => {
       if (snapshot.exists()) {
-        const featuredProductsArray: Product[] = Object.values(snapshot.val());
-        setFeaturedProducts(featuredProductsArray);
+        const allProducts: Product[] = [];
+        Object.values(snapshot.val()).forEach((category: any) => {
+          if (category.category && category.category.items) {
+            allProducts.push(...category.category.items);
+          }
+        });
+        setFeaturedProducts(allProducts);
       } else {
         console.log("Нету данных");
       }
     });
-  });
+  }, []);
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      whileInView={{ opacity: 1 }}
+      variants={fadeIn}
+      initial="initial"
+      animate="animate"
+      whileInView="whileInView"
       className="overflow-x-scroll text-red-500">
       <div className="w-max flex">
         {featuredProducts.map((item) => (

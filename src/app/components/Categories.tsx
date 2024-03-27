@@ -1,46 +1,22 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import FoodCartButton from "./FoodCartButton";
 import Loading from "../(pages)/menu/[category]/loading";
 import { get, ref } from "firebase/database";
 import { database } from "@/app/firebase/firebaseConfig";
-
-type Item = {
-  id: number;
-  title: string;
-  desc: string;
-  img: string;
-  price: number;
-  optionsId: number[];
-};
-
-type Category = {
-  name: string;
-  items: Item[];
-};
-
-type MenuItem = {
-  id: number;
-  title: string;
-  desc: string;
-  img: string;
-  slug: string;
-  color: string;
-  category: Category;
-};
-
-type Data = {
-  menu: MenuItem[];
-};
+import { Data, Item } from "../../../types/category";
 
 const CategoryPage = () => {
+  // Состояние для хранения данных, полученных из базы данных
   const [data, setData] = useState<Data | null>(null);
+  // Состояние для хранения имени текущей категории
   const [categoryName, setCategoryName] = useState("");
 
   useEffect(() => {
+    // Функция для получения данных из базы данных
     const fetchData = async () => {
       const menuRef = ref(database, "menu");
 
@@ -49,10 +25,12 @@ const CategoryPage = () => {
       const menuData = menuSnapshot.val() || [];
 
       setData({
+        // Установка полученных данных в состояние
         menu: menuData,
       });
 
       setCategoryName(
+        // Установка имени текущей категории в состояние
         window.location.pathname.split("/")[
           window.location.pathname.split("/").length - 1
         ]
@@ -62,17 +40,21 @@ const CategoryPage = () => {
     fetchData();
   }, []);
 
+  // Получение текущей категории из данных
   const currentCategory = data?.menu.find(
     (item) => item.slug === categoryName
   )?.category;
 
+  // Фильтрация еды по текущей категории
   const filteredFoods = currentCategory?.items || [];
 
   return (
     <div className="flex flex-wrap text-red-500">
       {!data ? (
+        // Отображение компонента загрузки, пока данные не будут получены
         <Loading />
       ) : (
+        // Отображение списка еды по текущей категории
         <div key={categoryName} className="w-full inline-flex flex-wrap">
           {filteredFoods.map((item: Item) => (
             <Link

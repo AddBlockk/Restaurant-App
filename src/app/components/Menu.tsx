@@ -29,7 +29,7 @@ const Menu = () => {
   }, [open]);
 
   return (
-    <div>
+    <>
       <Image
         src={open ? "/close.png" : "/open.png"}
         alt=""
@@ -57,7 +57,7 @@ const Menu = () => {
           </Link>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

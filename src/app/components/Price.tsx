@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/app/lib/store";
 import { decrement, increment } from "@/app/lib/features/counter/counterSlice";
 import { addItem, updateItem } from "@/app/lib/features/cart/cartSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/app/firebase/firebaseConfig";
+import SignIn from "../components/SignIn";
 
 type Props = {
   price: number;
@@ -18,6 +21,20 @@ const Price = ({ price, id, title, img, options }: Props) => {
   const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const [showSignIn, setShowSignIn] = useState(true);
+
+  // Получаем текущего пользователя, состояние загрузки и ошибку
+  const [user, loading, error] = useAuthState(auth);
+  // Состояние модального окна
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+
+  const handleCloseSignInModal = () => {
+    setIsSignInModalOpen(false);
+  };
+
+  const toggleSignIn = () => {
+    setShowSignIn(!showSignIn);
+  };
 
   useEffect(() => {
     setTotal(
@@ -27,6 +44,12 @@ const Price = ({ price, id, title, img, options }: Props) => {
   }, [count, selected, options, price]);
 
   const addToCart = () => {
+    // Если пользователь не авторизован, открываем модальное окно
+    if (!user) {
+      setIsSignInModalOpen(true);
+      return;
+    }
+
     const newItem = {
       id,
       title,
@@ -112,6 +135,18 @@ const Price = ({ price, id, title, img, options }: Props) => {
           {cartItems.find((item) => item.id === id) ? "Обновить" : "В корзину"}
         </button>
       </div>
+      {isSignInModalOpen && (
+        <>
+          <SignIn
+            isOpen={isSignInModalOpen}
+            onClose={handleCloseSignInModal}
+            toggleSignIn={toggleSignIn}
+            onSignIn={() => {
+              setIsSignInModalOpen(false);
+            }}
+          />
+        </>
+      )}
     </div>
   );
 };

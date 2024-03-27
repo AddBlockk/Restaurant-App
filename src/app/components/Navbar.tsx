@@ -1,11 +1,8 @@
 "use client";
-
 import React, { useState } from "react";
 import Menu from "./Menu";
 import Link from "next/link";
 import CartIcon from "./CartIcon";
-import Image from "next/image";
-import LogoutButton from "./LogoutButton";
 import Cookies from "js-cookie";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -54,15 +51,7 @@ function Navbar() {
           <Menu />
         </div>
         <div className="hidden md:flex gap-4 items-center justify-end flex-1">
-          {/* <div className="hidden top-3 r-2 lg:flex 2xl:static items-center gap-2 cursor-pointer bg-orange-300 px-1 rounded-lg user-select-none">
-            <Image src="/phone.png" alt="" width={20} height={20} />
-            <a href="tel:+79086118372">
-              <span>+7 (908) 611 83 72</span>
-            </a>
-          </div> */}
           <CartIcon />
-          {/* <LogoutButton /> */}
-
           {user ? (
             <button className="uppercase" onClick={handleSignOut}>
               Выйти из аккаунта
@@ -81,6 +70,9 @@ function Navbar() {
               isOpen={isSignInModalOpen}
               onClose={handleCloseSignInModal}
               toggleSignIn={toggleSignIn}
+              onSignIn={() => {
+                setIsSignInModalOpen(false);
+              }}
             />
           ) : (
             <SignUp

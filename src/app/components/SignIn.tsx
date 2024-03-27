@@ -4,15 +4,21 @@ import { auth } from "@/app/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import Modal from "./Modal/Modal";
+import Modal from "./Modal";
 
 interface SignInModalProps {
   isOpen: boolean;
   onClose: () => void;
   toggleSignIn: () => void;
+  onSignIn: () => void;
 }
 
-const SignInModal = ({ isOpen, onClose, toggleSignIn }: SignInModalProps) => {
+const SignInModal = ({
+  isOpen,
+  onClose,
+  toggleSignIn,
+  onSignIn,
+}: SignInModalProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
@@ -23,20 +29,16 @@ const SignInModal = ({ isOpen, onClose, toggleSignIn }: SignInModalProps) => {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
       if (res?.user) {
         sessionStorage.setItem("user", "true");
         setEmail("");
         setPassword("");
         Cookies.set("user", "true", { expires: 7 }); // Cookie будет храниться в течение 7 дней
         const userCookie = Cookies.get("user");
-        console.log(userCookie); // Выведет "true", если cookie сохранено
+        onSignIn();
         onClose();
       }
-    } catch (e) {
-      console.error(e);
-      setError("Неправильный email или пароль");
-    }
+    } catch (e) {}
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -71,6 +73,7 @@ const SignInModal = ({ isOpen, onClose, toggleSignIn }: SignInModalProps) => {
           </svg>
         </button>
       </div>
+      {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -93,16 +96,6 @@ const SignInModal = ({ isOpen, onClose, toggleSignIn }: SignInModalProps) => {
           className="w-full p-3 bg-red-500 rounded text-white hover:bg-red-600 transition duration-300 ease-in-out">
           Войти
         </button>
-        {error && (
-          <>
-            <p className="text-red-500">{error}</p>
-            <button
-              onClick={handleClose}
-              className="text-red-500 hover:text-red-600 transition duration-300 ease-in-out">
-              ОК
-            </button>
-          </>
-        )}
       </form>
       <Link
         href="#"
