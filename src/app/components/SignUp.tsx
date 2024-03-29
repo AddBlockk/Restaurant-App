@@ -13,6 +13,7 @@ interface SignUpProps {
 const SignUp = ({ isOpen, onClose, toggleSignIn }: SignUpProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
 
@@ -21,12 +22,14 @@ const SignUp = ({ isOpen, onClose, toggleSignIn }: SignUpProps) => {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
       sessionStorage.setItem("user", "true");
+      setName("");
       setEmail("");
       setPassword("");
     } catch (e) {
       console.error(e);
     }
   };
+  console.log(setName);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -50,6 +53,13 @@ const SignUp = ({ isOpen, onClose, toggleSignIn }: SignUpProps) => {
           </svg>
         </button>
       </div>
+      <input
+        type="text"
+        placeholder="Имя"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+      />
       <input
         type="email"
         placeholder="Email"

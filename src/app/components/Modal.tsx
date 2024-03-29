@@ -60,7 +60,7 @@ export default function Modal({
           initial="initial"
           animate="animate"
           exit="exit"
-          className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-80 z-10"
+          className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-80 z-10 px-10"
           onClick={handleClose}>
           <motion.div
             ref={modalRef}

@@ -1,8 +1,17 @@
+import Button from "@mui/material/Button";
 const FoodCartButton = () => {
   return (
-    <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">
+    <Button
+      variant="contained"
+      style={{
+        textTransform: "none",
+        fontSize: 16,
+        backgroundColor: "rgb(239 68 68)",
+        borderRadius: 10,
+        fontWeight: "bold",
+      }}>
       Добавить в корзину
-    </button>
+    </Button>
   );
 };
 export default FoodCartButton;

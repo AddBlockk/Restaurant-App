@@ -63,12 +63,20 @@ export const slider: Variants = {
 };
 
 export const slideVariants = {
-  initial: { opacity: 0 },
+  initial: { opacity: 0.9, scale: 0.9 },
   animate: {
     opacity: 1,
-
+    scale: 1,
     transition: {
-      duration: 2,
+      duration: 4,
+      ease: "easeInOut",
+    },
+  },
+  exit: {
+    opacity: 0.5,
+    scale: 0.2,
+    transition: {
+      duration: 0.5,
       ease: "easeInOut",
     },
   },

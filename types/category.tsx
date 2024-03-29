@@ -64,3 +64,9 @@ export interface Order {
   id: string;
   items: Product[];
 }
+
+interface Slider {
+  id: number;
+  title: string;
+  image: string;
+}

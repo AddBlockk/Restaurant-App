@@ -37,7 +37,9 @@ export function CartIcon() {
           </span>
         )}
       </div>
-      <span>Корзина</span>
+      <span className="relative bg-gradient-to-r from-transparent via-red-500 to-transparent bg-[length:0%_2px] bg-no-repeat bg-bottom transition-[background-size] duration-300 hover:bg-[length:100%_2px]">
+        Корзина
+      </span>
     </Link>
   );
 }

@@ -7,6 +7,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { OrderDetails } from "../../components/OrderDetails";
+import { Box, IconButton, Collapse } from "@mui/material";
+import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
 const arrowVariants = {
   up: { rotate: 180 },
@@ -64,9 +66,7 @@ export default function OrdersPage() {
                 <th className="py-2 text-center hidden md:table-cell">
                   Статус
                 </th>
-                <th className="py-2 hidden md:flex justify-center">
-                  Подробности
-                </th>
+                <th className="py-2 hidden md:flex justify-center"></th>
               </tr>
             </thead>
             <tbody>
@@ -85,22 +85,35 @@ export default function OrdersPage() {
                     <td className="py-2 w-[20%] text-center hidden md:table-cell">
                       {order.status}
                     </td>
-                    <td className="py-2 inline-flex md:flex justify-center md:justify-center">
-                      <button
-                        className="flex items-center justify-center px-2 py-1 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700"
-                        onClick={() => handleOrderDetailsClick(order)}>
-                        <motion.svg
-                          className="w-4 h-4 fill-current"
-                          viewBox="0 0 20 20"
+                    <td className="py-2 sm:inline-flex md:flex justify-center md:justify-center">
+                      <IconButton
+                        onClick={() => handleOrderDetailsClick(order)}
+                        aria-label="expand row"
+                        size="small">
+                        <motion.div
                           animate={order.isDetailsOpen ? "up" : "down"}
                           variants={arrowVariants}
                           transition={{ duration: 0.5 }}>
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </motion.svg>
-                      </button>
+                          <ExpandMoreIcon />
+                        </motion.div>
+                      </IconButton>
                     </td>
                   </tr>
-                  <OrderDetails order={order} isOpen={order.isDetailsOpen} />
+                  <tr>
+                    <td colSpan={5}>
+                      <Collapse
+                        in={order.isDetailsOpen}
+                        timeout="auto"
+                        unmountOnExit>
+                        <Box sx={{ margin: 1 }}>
+                          <OrderDetails
+                            order={order}
+                            isOpen={order.isDetailsOpen}
+                          />
+                        </Box>
+                      </Collapse>
+                    </td>
+                  </tr>
                 </>
               ))}
             </tbody>

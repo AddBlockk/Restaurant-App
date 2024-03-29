@@ -8,8 +8,12 @@ import { database } from "@/app/firebase/firebaseConfig";
 import Image from "next/image";
 import Loading from "./loading";
 import { Data, Product, Option } from "../../../../../../types/category";
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useRouter } from "next/navigation";
 
 const ProductPage = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const id = pathname.split("/").pop() || "";
   const [data, setData] = useState<Data | null>(null);
@@ -56,11 +60,22 @@ const ProductPage = () => {
     <Suspense fallback={<Loading />}>
       {product && (
         <div className="p-4 lg:px-20 xl:px-40 flex flex-col justify-center items-center text-red-500 md:flex-row md:gap-8">
-          <div className="overflow-hidden flex justify-center w-[100%] dm:w-[50%]">
+          <div className="overflow-hidden flex justify-center w-[100%] dm:w-[50%] relative">
+            <IconButton
+              onClick={() => router.back()}
+              size="large"
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                color: "rgb(239 68 68)",
+              }}>
+              <ArrowBackIcon />
+            </IconButton>
             <Image
               src={product.img}
               alt=""
-              className="object-contain transition-all duration-500 hover:rotate-[60deg] hover:scale-90"
+              className="object-contain transition-all duration-500 hover:scale-90"
               width={600}
               height={600}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

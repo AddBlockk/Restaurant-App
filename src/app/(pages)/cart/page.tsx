@@ -7,6 +7,7 @@ import { database, auth } from "../../firebase/firebaseConfig";
 import { push, ref, set } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
+import { Button } from "@mui/material";
 
 export default function CartPage() {
   const router = useRouter();
@@ -108,11 +109,17 @@ export default function CartPage() {
             )}
           </span>
         </div>
-        <button
-          className="bg-red-500 text-white p-3 rounded-md w-1/2 self-end"
-          onClick={handleSending}>
-          Заказать
-        </button>
+        <Button
+          onClick={handleSending}
+          variant="contained"
+          style={{
+            textTransform: "none",
+            fontSize: 20,
+            backgroundColor: "rgb(239 68 68)",
+            borderRadius: 10,
+          }}>
+          Добавить в корзину
+        </Button>
       </div>
     </div>
   );

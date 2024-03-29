@@ -18,7 +18,7 @@ type Props = {
 const Price = ({ price, id, title, img, options }: Props) => {
   const [total, setTotal] = useState(price);
   const [selected, setSelected] = useState(0);
-  const count = useSelector((state: RootState) => state.counter.value);
+  const [count, setCount] = useState(1);
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const [showSignIn, setShowSignIn] = useState(true);
@@ -42,6 +42,16 @@ const Price = ({ price, id, title, img, options }: Props) => {
         (options ? price + (options[selected]?.additionalPrice || 0) : price)
     );
   }, [count, selected, options, price]);
+
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
+
+  const decrementCount = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
 
   const addToCart = () => {
     // Если пользователь не авторизован, открываем модальное окно
@@ -118,9 +128,9 @@ const Price = ({ price, id, title, img, options }: Props) => {
         <div className="flex justify-between w-[100%] p-3 ring-1 ring-red-500">
           <span>Количество</span>
           <div className="flex gap-4 items-center">
-            <button onClick={() => dispatch(decrement())}>{"<"}</button>
+            <button onClick={decrementCount}>{"<"}</button>
             <span>{count}</span>
-            <button onClick={() => dispatch(increment())}>{">"}</button>
+            <button onClick={incrementCount}>{">"}</button>
           </div>
         </div>
         <button

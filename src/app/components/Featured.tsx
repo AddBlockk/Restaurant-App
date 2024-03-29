@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { get, ref } from "firebase/database";
 import { database } from "../firebase/firebaseConfig";
 import { fadeIn } from "./Animations";
-
+import Button from "@mui/material/Button";
 interface Product {
   id: number;
   title: string;
@@ -65,10 +65,17 @@ const Featured = () => {
               </h1>
               <p className="2xl:p-8">{item.desc}</p>
               <span className="text-xl font-bold">₽{item.price}</span>
-              <Link
-                href={`/menu`}
-                className="bg-red-500 text-white p-2 rounded-md">
-                Добавить в корзину
+              <Link href="/menu">
+                <Button
+                  variant="contained"
+                  style={{
+                    textTransform: "none",
+                    fontSize: 16,
+                    backgroundColor: "rgb(239 68 68)",
+                    borderRadius: 10,
+                  }}>
+                  Добавить в корзину
+                </Button>
               </Link>
             </div>
           </div>

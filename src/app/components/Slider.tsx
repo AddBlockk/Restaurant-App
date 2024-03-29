@@ -1,19 +1,15 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import sliderData from "../../../public/sliderData.json";
 import { slideVariants, slider, textVariants } from "./Animations";
-
-interface Slider {
-  id: number;
-  title: string;
-  image: string;
-}
+import { Button } from "@mui/material";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [prevSlide, setPrevSlide] = useState(0);
 
   useEffect(() => {
     const timeout = setTimeout(
@@ -21,7 +17,7 @@ const Slider = () => {
         setCurrentSlide((prev) =>
           prev === sliderData.length - 1 ? 0 : prev + 1
         ),
-      4000
+      6000
     );
     return () => clearTimeout(timeout);
   }, [currentSlide]);
@@ -39,13 +35,23 @@ const Slider = () => {
           initial="initial"
           animate="animate"
           exit="exit"
-          className="text-4xl text-center uppercase p-4 md:p-10 sm:text-5xl md:text-6xl xl:text-7xl">
+          className="text-3xl text-center uppercase p-4 md:p-10 sm:text-3xl md:text-4xl xl:text-5xl leading-10">
           {sliderData[currentSlide]?.title}
         </motion.h1>
-        <Link
-          href={"/menu"}
-          className="bg-red-500 text-white py-4 px-8 hover:bg-red-900 hover:ease-in duration-100">
-          Закажи сейчас
+
+        <Link href={"/menu"}>
+          <Button
+            variant="contained"
+            style={{
+              textTransform: "none",
+              fontSize: 18,
+              backgroundColor: "rgb(239 68 68)",
+              borderRadius: 5,
+              padding: 12,
+              fontWeight: "bold",
+            }}>
+            Закажи сейчас
+          </Button>
         </Link>
       </div>
       <div className="w-full flex-1 relative">
@@ -56,7 +62,7 @@ const Slider = () => {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="absolute inset-0 ">
+            className="absolute inset-0">
             <Image
               src={sliderData[currentSlide]?.image}
               alt=""

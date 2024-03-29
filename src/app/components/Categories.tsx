@@ -72,16 +72,14 @@ const CategoryPage = () => {
                 />
               </div>
               <div className="items-end font-bold">
-                <h1 className="text-2xl uppercase w-full break-words hyphens-manual mb-[10px]">
-                  {item.title}
-                </h1>
+                <div className="flex">
+                  <h1 className="text-2xl uppercase w-full break-words hyphens-manual mb-[10px]">
+                    {item.title}
+                  </h1>
+                  <h2 className="text-xl">₽{item.price}</h2>
+                </div>
                 <div className="h-[40px] flex justify-end">
-                  <>
-                    <h2 className="group-hover:hidden text-xl">
-                      ₽{item.price}
-                    </h2>
-                    <FoodCartButton />
-                  </>
+                  <FoodCartButton />
                 </div>
               </div>
             </Link>
