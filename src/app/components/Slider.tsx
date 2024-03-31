@@ -4,23 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import sliderData from "../../../public/sliderData.json";
-import { slideVariants, slider, textVariants } from "./Animations";
+import { slideVariants, slider } from "../../../animations/animations";
 import { Button } from "@mui/material";
+import Typewriter from "typewriter-effect";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [prevSlide, setPrevSlide] = useState(0);
-
-  useEffect(() => {
-    const timeout = setTimeout(
-      () =>
-        setCurrentSlide((prev) =>
-          prev === sliderData.length - 1 ? 0 : prev + 1
-        ),
-      6000
-    );
-    return () => clearTimeout(timeout);
-  }, [currentSlide]);
 
   return (
     <motion.div
@@ -30,15 +20,19 @@ const Slider = () => {
       whileInView="whileInView"
       className="overflow-hidden flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] lg:flex-row bg-fuchsia-50">
       <div className="flex-1 flex items-center justify-center flex-col gap-8 text-red-500 font-bold">
-        <motion.h1
-          variants={textVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="text-3xl text-center uppercase p-4 md:p-10 sm:text-3xl md:text-4xl xl:text-5xl leading-10">
-          {sliderData[currentSlide]?.title}
-        </motion.h1>
-
+        <div className="text-3xl text-center px-4 pt-4 md:p-10 sm:text-3xl md:text-4xl xl:text-5xl leading-10 md:leading-[100px] h-64  overflow-hidden">
+          <Typewriter
+            options={{
+              strings: [
+                "Всегда свежий, всегда хрустящий и всегда горячий",
+                "Мы доставим ваш заказ, где бы вы ни находились в Астрахани",
+                "Лучшая пицца, которой можно поделиться со своей семьей",
+              ],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </div>
         <Link href={"/menu"}>
           <Button
             variant="contained"
@@ -47,7 +41,8 @@ const Slider = () => {
               fontSize: 18,
               backgroundColor: "rgb(239 68 68)",
               borderRadius: 5,
-              padding: 12,
+              paddingTop: 10,
+              paddingBottom: 10,
               fontWeight: "bold",
             }}>
             Закажи сейчас

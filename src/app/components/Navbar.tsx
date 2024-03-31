@@ -71,7 +71,7 @@ function Navbar() {
         <div className="md:hidden">
           <Menu />
         </div>
-        <div className="hidden md:flex gap-4 items-center justify-end flex-1">
+        <div className="hidden md:flex gap-4 justify-end flex-1">
           <CartIcon />
           {user ? (
             <button

@@ -47,9 +47,9 @@ const MenuPage = () => {
                 <p className="text-sm my-8">{category.desc}</p>
               </div>
               <button
-                className={`text-${
-                  category.color === "white" ? "black" : "black"
-                } py-2 pr-4 rounded-md bottom-4 flex`}>
+                className={`py-2 pr-4 rounded-md bottom-4 flex text-${
+                  category.color === "white" ? "white" : "black"
+                }`}>
                 Подробнее
               </button>
             </div>

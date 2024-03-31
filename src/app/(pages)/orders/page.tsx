@@ -120,7 +120,9 @@ export default function OrdersPage() {
           </table>
         </div>
       ) : (
-        <div>No orders yet</div>
+        <div className="flex h-[100vh] items-center text-[24px] justify-center">
+          <div className="mb-36">У вас нету заказов</div>
+        </div>
       )}
     </div>
   );

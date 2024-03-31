@@ -35,8 +35,10 @@
     "react-places-autocomplete": "^7.3.0",
     "react-redux": "^9.1.0",
     "redux": "^5.0.1",
+    "sweetalert2": "^11.10.7",
     "tailwindcss": "3.4.1",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
     "@types/google-map-react": "^2.1.10",

@@ -50,42 +50,36 @@ const CategoryPage = () => {
 
   return (
     <div className="flex flex-wrap text-red-500">
-      {!data ? (
-        // Отображение компонента загрузки, пока данные не будут получены
-        <Loading />
-      ) : (
-        // Отображение списка еды по текущей категории
-        <div key={categoryName} className="w-full inline-flex flex-wrap">
-          {filteredFoods.map((item: Item) => (
-            <Link
-              className="group w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between"
-              href={`/menu/${categoryName}/${item.id}`}
-              key={item.id}>
-              <div className="relative h-[80%]">
-                <Image
-                  src={item.img}
-                  alt=""
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-contain group-hover:scale-90 transition duration-300 transform"
-                />
+      <div key={categoryName} className="w-full inline-flex flex-wrap">
+        {filteredFoods.map((item: Item) => (
+          <Link
+            className="group w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between"
+            href={`/menu/${categoryName}/${item.id}`}
+            key={item.id}>
+            <div className="relative h-[80%]">
+              <Image
+                src={item.img}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain group-hover:scale-90 transition duration-300 transform"
+              />
+            </div>
+            <div className="items-end font-bold">
+              <div className="flex">
+                <h1 className="text-2xl uppercase w-full break-words hyphens-manual mb-[10px]">
+                  {item.title}
+                </h1>
+                <h2 className="text-xl">₽{item.price}</h2>
               </div>
-              <div className="items-end font-bold">
-                <div className="flex">
-                  <h1 className="text-2xl uppercase w-full break-words hyphens-manual mb-[10px]">
-                    {item.title}
-                  </h1>
-                  <h2 className="text-xl">₽{item.price}</h2>
-                </div>
-                <div className="h-[40px] flex justify-end">
-                  <FoodCartButton />
-                </div>
+              <div className="h-[40px] flex justify-end">
+                <FoodCartButton />
               </div>
-            </Link>
-          ))}
-        </div>
-      )}
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

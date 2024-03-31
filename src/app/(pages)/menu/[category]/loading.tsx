@@ -1,10 +1,10 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 export default function Loading() {
-  const skeletonArray = Array.from({ length: 6 });
+  const skeletonArray = Array.from({ length: 3 });
 
   return (
-    <>
+    <div className="flex flex-wrap">
       {skeletonArray.map((_, i) => (
         <div
           key={i}
@@ -24,6 +24,6 @@ export default function Loading() {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }

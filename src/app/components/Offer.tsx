@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-import { offer } from "./Animations";
+import { offer } from "../../../animations/animations";
+import { Button } from "@mui/material";
 
 const Offer = () => {
   return (
@@ -22,10 +23,19 @@ const Offer = () => {
           процессно-ориентированных методов расширения прав и возможностей.
           Быстро проводите параллель.
         </p>
-        <Link
-          href={"/menu"}
-          className="bg-red-500 text-white rounded-md py-3 px-6 hover:bg-red-900 hover:ease-in duration-100">
-          Заказывайте прямо сейчас
+        <Link href={"/menu"}>
+          <Button
+            variant="contained"
+            style={{
+              textTransform: "none",
+              fontSize: 16,
+              backgroundColor: "rgb(239 68 68)",
+              borderRadius: 10,
+              padding: 15,
+              fontWeight: 600,
+            }}>
+            Заказывайте прямо сейчас
+          </Button>
         </Link>
       </div>
       <div className="flex-1 w-full relative md:h-full">

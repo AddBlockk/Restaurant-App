@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import Modal from "./Modal";
-
+import Swal from "sweetalert2";
 interface SignInModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -36,9 +36,28 @@ const SignInModal = ({
         Cookies.set("user", "true", { expires: 7 }); // Cookie будет храниться в течение 7 дней
         const userCookie = Cookies.get("user");
         onSignIn();
+        Swal.fire({
+          icon: "success",
+          title: "Успешный вход",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         onClose();
       }
-    } catch (e) {}
+      if (!res?.user) {
+        setEmail("");
+        setPassword("");
+        Swal.fire({
+          icon: "error",
+          title: "Ошибка",
+          text: "Повторите попытку",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (e) {
+      setError("Неверный email или пароль");
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +69,6 @@ const SignInModal = ({
     onClose();
     setError("");
   };
-
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
       <div className="relative items-center flex mb-5">
@@ -80,7 +98,7 @@ const SignInModal = ({
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+          className="w-full p-3 mb-4 border border-gray-300 text-black rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
           autoComplete="username"
         />
         <input
@@ -88,7 +106,7 @@ const SignInModal = ({
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+          className="w-full p-3 mb-4 border border-gray-300 text-black rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
           autoComplete="current-password"
         />
         <button
@@ -104,7 +122,7 @@ const SignInModal = ({
           toggleSignIn();
         }}
         className="text-gray-600 flex justify-end mt-4 hover:text-red-500 transition duration-300 ease-in-out">
-        Зарегистрироваться
+        <span className="text-transform: capitalize">Зарегистрироваться</span>
       </Link>
     </Modal>
   );

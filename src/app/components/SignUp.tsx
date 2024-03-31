@@ -20,7 +20,6 @@ const SignUp = ({ isOpen, onClose, toggleSignIn }: SignUpProps) => {
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(email, password);
-      console.log({ res });
       sessionStorage.setItem("user", "true");
       setName("");
       setEmail("");
@@ -29,7 +28,6 @@ const SignUp = ({ isOpen, onClose, toggleSignIn }: SignUpProps) => {
       console.error(e);
     }
   };
-  console.log(setName);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -58,26 +56,26 @@ const SignUp = ({ isOpen, onClose, toggleSignIn }: SignUpProps) => {
         placeholder="Имя"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+        className="w-full p-3 mb-4 border border-gray-300 text-black rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
       />
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+        className="w-full p-3 mb-4 border border-gray-300 text-black rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-3 mb-4 border border-gray-300 rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
+        className="w-full p-3 mb-4 border border-gray-300 text-black rounded outline-none focus:border-red-500 focus:ring-red-500 focus:ring-1"
       />
       <button
         onClick={handleSignUp}
         className="w-full p-3 bg-red-500 rounded text-white hover:bg-red-600 transition duration-300 ease-in-out">
-        Зарегистрироваться
+        <span className="text-transform: capitalize">Зарегистрироваться</span>
       </button>
       <Link
         href="#"
@@ -86,7 +84,9 @@ const SignUp = ({ isOpen, onClose, toggleSignIn }: SignUpProps) => {
           toggleSignIn();
         }}
         className="text-gray-600 flex justify-end mt-4 hover:text-red-500 transition duration-300 ease-in-out">
-        Уже зарегистрированы?
+        <span className="text-transform: capitalize">
+          Уже зарегистрированы?
+        </span>
       </Link>
     </Modal>
   );

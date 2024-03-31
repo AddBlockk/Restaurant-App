@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { get, ref } from "firebase/database";
 import { database } from "../firebase/firebaseConfig";
-import { fadeIn } from "./Animations";
+import { fadeIn } from "../../../animations/animations";
 import Button from "@mui/material/Button";
 interface Product {
   id: number;
