@@ -75,10 +75,6 @@ export interface CartItem {
   quantity: number;
 }
 
-export interface CartState {
-  items: CartItem[];
-}
-
 export interface CounterState {
   value: number;
 }
