@@ -65,8 +65,20 @@ export interface Order {
   items: Product[];
 }
 
-interface Slider {
+export interface CartItem {
   id: number;
   title: string;
-  image: string;
+  desc: string;
+  img: string;
+  price: number;
+  options?: { title: string; additionalPrice: number }[];
+  quantity: number;
+}
+
+export interface CartState {
+  items: CartItem[];
+}
+
+export interface CounterState {
+  value: number;
 }

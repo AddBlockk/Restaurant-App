@@ -5,16 +5,6 @@ import Link from "next/link";
 import type { RootState } from "@/app/lib/store";
 import { useSelector } from "react-redux";
 
-export interface CartItem {
-  id: number;
-  title: string;
-  desc: string;
-  img: string;
-  price: number;
-  options?: { title: string; additionalPrice: number }[];
-  quantity: number;
-}
-
 export function CartIcon() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalQuantity = cartItems.reduce(

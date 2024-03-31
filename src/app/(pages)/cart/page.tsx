@@ -8,6 +8,7 @@ import { push, ref, set } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
+import Swal from "sweetalert2";
 
 export default function CartPage() {
   const router = useRouter();
@@ -42,7 +43,12 @@ export default function CartPage() {
       const newOrderRef = push(ref(database, `users/${user.uid}/orders`));
       set(newOrderRef, order);
       dispatch(clearCart());
-      alert(`Вы успешно оформили заказ на сумму ${totalPrice} рублей!`);
+      Swal.fire({
+        icon: "success",
+        title: `Вы успешно оформили заказ на сумму ${totalPrice} рублей!`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       router.push("./orders");
     } else {
       alert("Ваша корзина пуста!");
