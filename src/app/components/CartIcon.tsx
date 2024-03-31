@@ -23,7 +23,7 @@ export function CartIcon() {
   );
 
   return (
-    <Link href="/cart" className="flex items-center gap-2">
+    <Link href="/cart" className="flex gap-2">
       <div className="relative w-8 h-8 md:w-5 md:h-5">
         <Image
           src="/cart.png"

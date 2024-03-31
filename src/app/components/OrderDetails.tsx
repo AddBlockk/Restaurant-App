@@ -1,7 +1,6 @@
 import React from "react";
 import { Product, Order } from "../../../types/category";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 import Collapse from "@mui/material/Collapse";
 import Grow from "@mui/material/Grow";
 
@@ -15,15 +14,15 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
   isOpen,
 }) => {
   return (
-    <Collapse in={isOpen} timeout="auto" unmountOnExit>
+    <Collapse in={isOpen} timeout={1}>
       <div className="border-gray-200 flex-shrink-0">
         {order.items &&
           order.items.map((product: Product, index) => (
             <Grow
               key={product.id}
               in={isOpen}
-              timeout={{ enter: 1000, exit: 500 }}
-              style={{ transitionDelay: `${index * 300}ms` }}>
+              timeout={{ enter: 1000, exit: 1000 }}
+              style={{ transitionDelay: `${index * 100}ms` }}>
               <div
                 key={product.id}
                 className="flex items-center sm:flex-wrap mb-4">
