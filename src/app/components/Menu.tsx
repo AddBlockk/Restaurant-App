@@ -24,7 +24,6 @@ const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
-  const [open, setOpen] = useState(false);
   const [user] = useAuthState(auth);
   const router = useRouter();
 
@@ -47,6 +46,15 @@ const Menu = () => {
     setShowSignIn(!showSignIn);
   };
 
+  const handleBodyScroll = (isOpen: any) => {
+    const body = document.body;
+    if (isOpen) {
+      body.classList.add("no-scroll");
+    } else {
+      body.classList.remove("no-scroll");
+    }
+  };
+
   return (
     <>
       <Image
@@ -55,7 +63,10 @@ const Menu = () => {
         width={20}
         height={20}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          handleBodyScroll(!isOpen);
+        }}
         className="cursor-pointer"
       />
       <AnimatePresence mode="wait">
@@ -65,8 +76,8 @@ const Menu = () => {
             exit="exit"
             animate={isOpen ? "enter" : "exit"}
             variants={menu}
-            className="bg-red-500 text-white absolute left-0 top-12 w-full h-[100vh] flex flex-col gap-8 items-center justify-center text-2xl z-10">
-            <div className="flex flex-col gap-24 h-100% bg-red-500 mx-6">
+            className="bg-red-500 text-white fixed left-0 top-12 w-full h-[100vh] flex flex-col gap-8 items-center pt-[calc(50%-3rem)] text-2xl z-10">
+            <div className="flex flex-col flex-wrap items-center gap-24 bg-red-500 mx-6 w-[300px]">
               {user ? (
                 <button
                   className="text-start uppercase relative bg-gradient-to-r from-transparent via-red-500 to-transparent bg-[length:0%_2px] bg-no-repeat bg-bottom transition-[background-size] duration-300 hover:bg-[length:100%_2px]"
@@ -86,11 +97,15 @@ const Menu = () => {
                   <Link
                     href={item.url}
                     key={item.id}
-                    onClick={() => setOpen(false)}>
+                    onClick={() => {
+                      if (window.location.pathname !== item.url) {
+                        setIsOpen(!isOpen);
+                      }
+                    }}>
                     {item.title}
                   </Link>
                 ))}
-              <Link href="/cart" onClick={() => setOpen(false)}>
+              <Link href="/cart" onClick={() => setIsOpen(!isOpen)}>
                 <CartIcon />
               </Link>
             </div>

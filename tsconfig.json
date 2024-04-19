@@ -12,6 +12,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
@@ -28,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/proba/page.jsx"
+    "src/app/proba/page.jsx",
+    "jest.config.js"
   ],
   "exclude": ["node_modules"]
 }
