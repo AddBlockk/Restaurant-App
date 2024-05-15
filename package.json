@@ -37,6 +37,7 @@
     "react-places-autocomplete": "^7.3.0",
     "react-redux": "^9.1.0",
     "redux": "^5.0.1",
+    "sharp": "^0.33.3",
     "sweetalert2": "^11.10.7",
     "tailwindcss": "3.4.1",
     "typewriter-effect": "^2.21.0"
