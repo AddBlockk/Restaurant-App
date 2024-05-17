@@ -124,7 +124,7 @@ export default function CartPage() {
             backgroundColor: "rgb(239 68 68)",
             borderRadius: 10,
           }}>
-          Добавить в корзину
+          Заказать
         </Button>
       </div>
     </div>
