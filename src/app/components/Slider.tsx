@@ -1,8 +1,8 @@
 "use client";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import sliderData from "../../../public/sliderData.json";
 import { slideVariants, slider } from "../../../animations/animations";
 import { Button } from "@mui/material";

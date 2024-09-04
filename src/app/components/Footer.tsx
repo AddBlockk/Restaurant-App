@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 const Footer = () => {
   return (
@@ -7,7 +6,9 @@ const Footer = () => {
       <Link href="/" className="font-bold text-base md:text-xl uppercase">
         Boltach
       </Link>
-      <p className="text-sm md:text-base">© ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+      <p className="text-sm md:text-base cursor-default">
+        © ВСЕ ПРАВА ЗАЩИЩЕНЫ
+      </p>
     </div>
   );
 };

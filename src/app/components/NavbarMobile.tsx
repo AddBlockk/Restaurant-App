@@ -20,7 +20,7 @@ const links = [
   { id: 3, title: "Заказ", url: "/orders" },
 ];
 
-const Menu = () => {
+const NavbarMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
@@ -76,18 +76,21 @@ const Menu = () => {
             exit="exit"
             animate={isOpen ? "enter" : "exit"}
             variants={menu}
-            className="bg-red-500 text-white fixed left-0 top-12 w-full h-[100vh] flex flex-col gap-8 items-center pt-[calc(50%-3rem)] text-2xl z-10">
+            className="bg-red-500 text-white fixed left-0 top-12 w-full h-[100vh] flex flex-col gap-8 items-center pt-[calc(50%-3rem)] text-2xl z-10"
+          >
             <div className="flex flex-col flex-wrap items-center gap-24 bg-red-500 mx-6 w-[300px]">
               {user ? (
                 <button
                   className="text-start uppercase relative bg-gradient-to-r from-transparent via-red-500 to-transparent bg-[length:0%_2px] bg-no-repeat bg-bottom transition-[background-size] duration-300 hover:bg-[length:100%_2px]"
-                  onClick={handleSignOut}>
+                  onClick={handleSignOut}
+                >
                   Выйти из аккаунта
                 </button>
               ) : (
                 <button
                   onClick={handleOpenSignInModal}
-                  className="text-start uppercase relative bg-gradient-to-r from-transparent via-red-500 to-transparent bg-[length:0%_2px] bg-no-repeat bg-bottom transition-[background-size] duration-300 hover:bg-[length:100%_2px]">
+                  className="text-start uppercase relative bg-gradient-to-r from-transparent via-red-500 to-transparent bg-[length:0%_2px] bg-no-repeat bg-bottom transition-[background-size] duration-300 hover:bg-[length:100%_2px]"
+                >
                   Войти
                 </button>
               )}
@@ -101,7 +104,8 @@ const Menu = () => {
                       if (window.location.pathname !== item.url) {
                         setIsOpen(!isOpen);
                       }
-                    }}>
+                    }}
+                  >
                     {item.title}
                   </Link>
                 ))}
@@ -136,4 +140,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default NavbarMobile;

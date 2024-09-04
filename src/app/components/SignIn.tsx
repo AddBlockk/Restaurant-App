@@ -4,21 +4,16 @@ import { auth } from "@/app/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import Modal from "./Modal";
+import ModalAuthentication from "./ModalAuthentication";
 import Swal from "sweetalert2";
-interface SignInModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  toggleSignIn: () => void;
-  onSignIn: () => void;
-}
+import { SignInModalState } from "../../../types";
 
 const SignInModal = ({
   isOpen,
   onClose,
   toggleSignIn,
   onSignIn,
-}: SignInModalProps) => {
+}: SignInModalState) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
@@ -70,19 +65,21 @@ const SignInModal = ({
     setError("");
   };
   return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
+    <ModalAuthentication isOpen={isOpen} onClose={handleClose}>
       <div className="relative items-center flex mb-5">
         <h1 className="text-red-500 text-2xl">Вход</h1>
         <button
           onClick={onClose}
-          className="absolute right-0 text-gray-600 hover:text-red-500">
+          className="absolute right-0 text-gray-600 hover:text-red-500"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6">
+            className="w-6 h-6"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -111,7 +108,8 @@ const SignInModal = ({
         />
         <button
           type="submit"
-          className="w-full p-3 bg-red-500 rounded text-white hover:bg-red-600 transition duration-300 ease-in-out">
+          className="w-full p-3 bg-red-500 rounded text-white hover:bg-red-600 transition duration-300 ease-in-out"
+        >
           Войти
         </button>
       </form>
@@ -121,10 +119,11 @@ const SignInModal = ({
           e.preventDefault();
           toggleSignIn();
         }}
-        className="text-gray-600 flex justify-end mt-4 hover:text-red-500 transition duration-300 ease-in-out">
+        className="text-gray-600 flex justify-end mt-4 hover:text-red-500 transition duration-300 ease-in-out"
+      >
         <span className="text-transform: capitalize">Зарегистрироваться</span>
       </Link>
-    </Modal>
+    </ModalAuthentication>
   );
 };
 

@@ -7,18 +7,11 @@ import { get, ref } from "firebase/database";
 import { database } from "../firebase/firebaseConfig";
 import { fadeIn } from "../../../animations/animations";
 import Button from "@mui/material/Button";
-interface Product {
-  id: number;
-  title: string;
-  desc: string;
-  img: string;
-  price: number;
-  optionsId?: number[];
-}
+import { Product } from "../../../types";
+import FoodCartButton from "./FoodCartButton";
 
 const Featured = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
-
   useEffect(() => {
     const featuredProductsRef = ref(database, "menu");
     get(featuredProductsRef).then((snapshot) => {
@@ -42,12 +35,14 @@ const Featured = () => {
       initial="initial"
       animate="animate"
       whileInView="whileInView"
-      className="overflow-x-scroll text-red-500">
+      className="overflow-x-scroll text-red-500"
+    >
       <div className="w-max flex">
         {featuredProducts.map((item) => (
           <div
             key={item.id}
-            className="w-screen group h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh] gap-[20px]">
+            className="w-screen group h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh] gap-[20px]"
+          >
             {item.img && (
               <div className="relative flex-1 w-full transition-all duration-500 group-hover:scale-90 ">
                 <Image
@@ -66,16 +61,7 @@ const Featured = () => {
               <p className="2xl:p-8">{item.desc}</p>
               <span className="text-xl font-bold">₽{item.price}</span>
               <Link href="/menu">
-                <Button
-                  variant="contained"
-                  style={{
-                    textTransform: "none",
-                    fontSize: 16,
-                    backgroundColor: "rgb(239 68 68)",
-                    borderRadius: 10,
-                  }}>
-                  Добавить в корзину
-                </Button>
+                <FoodCartButton />
               </Link>
             </div>
           </div>

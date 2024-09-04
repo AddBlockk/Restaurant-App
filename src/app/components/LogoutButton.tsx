@@ -9,13 +9,11 @@ import { useRouter } from "next/navigation";
 const LogoutButton = () => {
   const [user] = useAuthState(auth);
   const router = useRouter();
-
   const handleSignOut = async () => {
     await signOut(auth);
     sessionStorage.removeItem("user");
     router.push("/");
   };
-
   if (!user) {
     return (
       <button

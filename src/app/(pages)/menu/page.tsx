@@ -5,7 +5,7 @@ import { get, ref } from "firebase/database";
 import { database } from "@/app/firebase/firebaseConfig";
 import Loading from "./loading";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Menu } from "../../../../types/category";
+import { Menu } from "../../../../types";
 
 const MenuPage = () => {
   const [menu, setMenu] = useState<Menu[]>([]);
@@ -37,9 +37,11 @@ const MenuPage = () => {
             className="relative bg-cover p-8"
             style={{
               backgroundImage: `url(${category.img})`,
-            }}>
+            }}
+          >
             <div
-              className={`text-${category.color} flex flex-col justify-between h-[320px] w-[70%] 2xl:w-[50%]`}>
+              className={`text-${category.color} flex flex-col justify-between h-[320px] w-[70%] 2xl:w-[50%]`}
+            >
               <div>
                 <h1 className="uppercase font-bold text-3xl">
                   {category.title}
@@ -49,7 +51,8 @@ const MenuPage = () => {
               <button
                 className={`py-2 pr-4 rounded-md bottom-4 flex text-${
                   category.color === "white" ? "white" : "black"
-                }`}>
+                }`}
+              >
                 Подробнее
               </button>
             </div>

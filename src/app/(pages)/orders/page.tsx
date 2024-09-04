@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { get, ref } from "firebase/database";
-import { Product, Order } from "../../../../types/category";
+import { Product, Order } from "../../../../types";
 import { database, auth } from "../../firebase/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Image from "next/image";
@@ -74,7 +74,8 @@ export default function OrdersPage() {
                 <>
                   <tr
                     key={order.id}
-                    className="border-b border-gray-200 w-full">
+                    className="border-b border-gray-200 w-full"
+                  >
                     <td className="hidden md:block py-2 pr-[80px]">
                       {order.id}
                     </td>
@@ -89,11 +90,13 @@ export default function OrdersPage() {
                       <IconButton
                         onClick={() => handleOrderDetailsClick(order)}
                         aria-label="expand row"
-                        size="small">
+                        size="small"
+                      >
                         <motion.div
                           animate={order.isDetailsOpen ? "up" : "down"}
                           variants={arrowVariants}
-                          transition={{ duration: 0.5 }}>
+                          transition={{ duration: 0.5 }}
+                        >
                           <ExpandMoreIcon />
                         </motion.div>
                       </IconButton>
@@ -104,7 +107,8 @@ export default function OrdersPage() {
                       <Collapse
                         in={order.isDetailsOpen}
                         timeout="auto"
-                        unmountOnExit>
+                        unmountOnExit
+                      >
                         <Box sx={{ margin: 1 }}>
                           <OrderDetails
                             order={order}

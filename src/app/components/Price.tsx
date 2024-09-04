@@ -1,31 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/app/lib/store";
-import { decrement, increment } from "@/app/lib/features/counter/counterSlice";
 import { addItem, updateItem } from "@/app/lib/features/cart/cartSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/firebaseConfig";
 import SignIn from "../components/SignIn";
+import { PriceState } from "../../../types";
 
-type Props = {
-  price: number;
-  id: number;
-  title: string;
-  img: string;
-  options?: { title: string; additionalPrice: number }[];
-};
-
-const Price = ({ price, id, title, img, options }: Props) => {
+const Price = ({ desc, price, id, title, img, options }: PriceState) => {
   const [total, setTotal] = useState(price);
   const [selected, setSelected] = useState(0);
   const [count, setCount] = useState(1);
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const [showSignIn, setShowSignIn] = useState(true);
-
-  // Получаем текущего пользователя, состояние загрузки и ошибку
   const [user, loading, error] = useAuthState(auth);
-  // Состояние модального окна
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   const handleCloseSignInModal = () => {
@@ -54,7 +43,6 @@ const Price = ({ price, id, title, img, options }: Props) => {
   };
 
   const addToCart = () => {
-    // Если пользователь не авторизован, открываем модальное окно
     if (!user) {
       setIsSignInModalOpen(true);
       return;
@@ -63,6 +51,7 @@ const Price = ({ price, id, title, img, options }: Props) => {
     const newItem = {
       id,
       title,
+      desc,
       img,
       price: total / count,
       quantity: count,
@@ -90,6 +79,7 @@ const Price = ({ price, id, title, img, options }: Props) => {
       id,
       title,
       img,
+      desc,
       price: total / count,
       quantity: count,
       options: options
@@ -118,7 +108,8 @@ const Price = ({ price, id, title, img, options }: Props) => {
                 background: selected === index ? "rgb(248 113 113)" : "white",
                 color: selected === index ? "white" : "red",
               }}
-              onClick={() => setSelected(index)}>
+              onClick={() => setSelected(index)}
+            >
               {option.title}
             </button>
           ))}
@@ -141,7 +132,8 @@ const Price = ({ price, id, title, img, options }: Props) => {
               addToCart();
             }
           }}
-          className="uppercase sm:w-56 bg-red-500 text-white p-3 ring-1 ring-red-500 w-[100%]">
+          className="uppercase sm:w-56 bg-red-500 text-white p-3 ring-1 ring-red-500 w-[100%]"
+        >
           {cartItems.find((item) => item.id === id) ? "Обновить" : "В корзину"}
         </button>
       </div>

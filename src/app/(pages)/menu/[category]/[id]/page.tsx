@@ -7,7 +7,7 @@ import { get, ref } from "firebase/database";
 import { database } from "@/app/firebase/firebaseConfig";
 import Image from "next/image";
 import Loading from "./loading";
-import { Data, Product, Option } from "../../../../../../types/category";
+import { Data, Product, Option } from "../../../../../../types";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
@@ -69,7 +69,8 @@ const ProductPage = () => {
                 top: 0,
                 left: 0,
                 color: "rgb(239 68 68)",
-              }}>
+              }}
+            >
               <ArrowBackIcon />
             </IconButton>
             <Image
@@ -99,6 +100,7 @@ const ProductPage = () => {
               }
               title={product.title}
               img={product.img}
+              desc={product.desc}
             />
           </div>
         </div>
