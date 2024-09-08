@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/firebaseConfig";
 import { useRouter } from "next/navigation";
@@ -17,8 +17,6 @@ const SignInModal = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-  const router = useRouter();
-
   const [error, setError] = useState("");
 
   const handleSignIn = async () => {
@@ -40,8 +38,6 @@ const SignInModal = ({
         onClose();
       }
       if (!res?.user) {
-        setEmail("");
-        setPassword("");
         Swal.fire({
           icon: "error",
           title: "Ошибка",
@@ -64,6 +60,19 @@ const SignInModal = ({
     onClose();
     setError("");
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   return (
     <ModalAuthentication isOpen={isOpen} onClose={handleClose}>
       <div className="relative items-center flex mb-5">

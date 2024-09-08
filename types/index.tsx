@@ -1,5 +1,7 @@
 import { ComponentPropsWithoutRef, ReactNode } from "react";
+
 export type Item = {
+  [x: string]: any;
   id: number;
   title: string;
   desc: string;
@@ -121,3 +123,25 @@ export interface SignUpState {
 export interface ProvidersState {
   children: ReactNode;
 }
+
+export type AllMenuItem = {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  price: number;
+  category: {
+    slug: string;
+  };
+};
+
+export type AllMenuCategory = {
+  category: {
+    slug: string;
+    items: AllMenuItem[];
+  };
+};
+
+export type AllMenuData = {
+  menu: AllMenuCategory[];
+};
