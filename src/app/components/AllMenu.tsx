@@ -43,14 +43,14 @@ const AllMenu = () => {
             key={item.id}
           >
             <div>
-              <div className="">
+              <div className="flex justify-center">
                 <Image
                   src={item.img}
                   alt=""
-                  height={200}
                   width={200}
+                  height={200}
                   priority
-                  className="object-contain group-hover:scale-90 transition duration-300 transform h-[60%]"
+                  className="object-contain group-hover:scale-90 transition duration-300"
                 />
               </div>
             </div>
