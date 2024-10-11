@@ -65,12 +65,12 @@ const ProductPage = () => {
       {product && (
         <div className="p-4 lg:px-20 xl:px-40 justify-center items-center text-red-500 md:flex-row max-w-[1600px] m-auto">
           <div className="flex justify-center items-center md:gap-8 flex-wrap md:flex-nowrap">
-            <div className="overflow-hidden flex justify-center relative">
+            <div className="overflow-hidden block justify-center relative">
               <IconButton
                 onClick={() => router.back()}
                 size="large"
                 sx={{
-                  position: "absolute",
+                  position: "flex",
                   top: 0,
                   left: 0,
                   color: "rgb(239 68 68)",

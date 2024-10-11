@@ -5,6 +5,7 @@ import { addItem, updateItem } from "@/app/lib/features/cart/cartSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/firebaseConfig";
 import SignIn from "../components/SignIn";
+import SignUp from "./SignUp";
 import { PriceState } from "../../../types";
 
 const Price = ({ desc, price, id, title, img, options }: PriceState) => {
@@ -139,14 +140,22 @@ const Price = ({ desc, price, id, title, img, options }: PriceState) => {
       </div>
       {isSignInModalOpen && (
         <>
-          <SignIn
-            isOpen={isSignInModalOpen}
-            onClose={handleCloseSignInModal}
-            toggleSignIn={toggleSignIn}
-            onSignIn={() => {
-              setIsSignInModalOpen(false);
-            }}
-          />
+          {showSignIn ? (
+            <SignIn
+              isOpen={isSignInModalOpen}
+              onClose={handleCloseSignInModal}
+              toggleSignIn={toggleSignIn}
+              onSignIn={() => {
+                setIsSignInModalOpen(false);
+              }}
+            />
+          ) : (
+            <SignUp
+              isOpen={isSignInModalOpen}
+              onClose={handleCloseSignInModal}
+              toggleSignIn={toggleSignIn}
+            />
+          )}
         </>
       )}
     </div>
